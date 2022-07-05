@@ -1,0 +1,7 @@
+{
+  "name": "pazzaz-mob",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
