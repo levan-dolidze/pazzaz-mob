@@ -1,0 +1,32 @@
+<div class="login-content">
+  <div class="login-inner">
+    <form (ngSubmit)="userLogin(userLoginForm)" #userLoginForm="ngForm">
+      <ion-item>
+        <ion-input [(ngModel)]="field.username" 
+                   name="username"
+                   #userUsername="ngModel"
+                   required
+                   placeholder="Username">
+        </ion-input>
+      </ion-item>
+      
+      <div style="margin-top:5px;color: red;" *ngIf="userLoginForm.submitted&&userUsername.errors?.required">
+        შეიყვანეთ მომხმარებელი
+    </div>
+      <ion-item>
+        <ion-input [(ngModel)]="field.password" 
+        required
+        name="password"
+        #userPassword="ngModel"
+                   placeholder="Password">
+        </ion-input>
+        <span (click)="forgetPass()" style="font-size:small">დაგავიწყდა?</span>
+      </ion-item>
+      <div style="margin-top:5px;color: red;"*ngIf="userLoginForm.submitted&&userPassword.errors?.required">
+        შეიყვანეთ პაროლი
+    </div>
+      <ion-button type="submit" class="login-btn" color="primary">sign in</ion-button>
+
+    </form>
+  </div>
+</div>

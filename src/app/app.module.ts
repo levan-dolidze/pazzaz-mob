@@ -8,11 +8,14 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LanguageComponent } from './language/language.component';
+import { LoginComponent } from './login/login.component';
+import { FormsModule } from '@angular/forms';
+
 
 
 @NgModule({
-  declarations: [AppComponent,LanguageComponent],
-  imports: [BrowserModule, IonicModule.forRoot(),
+  declarations: [AppComponent,LanguageComponent,LoginComponent],
+  imports: [BrowserModule,FormsModule, IonicModule.forRoot(),
            AppRoutingModule,
            HttpClientModule,
            TranslateModule.forRoot({
