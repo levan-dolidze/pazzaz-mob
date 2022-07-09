@@ -1,3 +1,12 @@
 .my-custom-menu {
     --width: 500px;
   }
+  .item-content{
+    padding: 20px;
+    width: 100%;
+    display: flex;
+  }
+  .item-list{
+    width: 150px;
+    height: 150px;
+  }

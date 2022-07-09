@@ -7,7 +7,7 @@ import { Field } from '../shared/classes';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  field:Field=new Field();
+  field: Field = new Field();
   constructor() { }
 
   ngOnInit() { }
@@ -16,10 +16,13 @@ export class LoginComponent implements OnInit {
 
 
   }
-  userLogin(form){
-    console.log(form)
-    console.log(this.field.username)
-    console.log(this.field.password)
+  userLogin(form) {
+    if (form.invalid){
+      return 
+    }
+    else{
+      
+    }
 
   }
 }

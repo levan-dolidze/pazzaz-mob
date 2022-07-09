@@ -3,7 +3,59 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  // api: [{
+  //   itemId: 120,
+  //   itemName: 'Ecco tred',
+  //   oldPrice: 150,
+  //   newPrice: 100,
+  //   brand: 'Ecco',
+  //   storeId: 10,
+  //   season: 'ზაფხული',
+  //   gender: 'male',
+  //   type: 'ფეხსაცმელი',
+  //   typeL1: 'ჩექმა',
+  //   typeL2: 'ნახევარჩექმა',
+  //   material: 'ტყავი',
+  //   color: 'თეთრი',
+  //   hill: 'დაბალი'
+  // },
+  // {
+  //   itemId: 121,
+  //   itemName: 'Ecco tred',
+  //   oldPrice: 200,
+  //   newPrice: 100,
+  //   brand: 'Ecco',
+  //   storeId: 10,
+  //   season: 'ზაფხული',
+  //   gender: 'male',
+  //   type: 'ფეხსაცმელი',
+  //   typeL1: 'ჩექმა',
+  //   typeL2: 'ნახევარჩექმა',
+  //   material: 'ტყავი',
+  //   color: 'თეთრი',
+  //   hill: 'დაბალი'
+
+
+  // },
+  // {
+  //   itemId: 122,
+  //   itemName: 'Ecco tred',
+  //   oldPrice: 150,
+  //   newPrice: 100,
+  //   brand: 'Ecco',
+  //   storeId: 10,
+  //   season: 'ზაფხული',
+  //   gender: 'male',
+  //   type: 'ფეხსაცმელი',
+  //   typeL1: 'ჩექმა',
+  //   typeL2: 'ნახევარჩექმა',
+  //   material: 'ტყავი',
+  //   color: 'თეთრი',
+  //   hill: 'დაბალი'
+
+
+  // }]
 };
 
 /*
