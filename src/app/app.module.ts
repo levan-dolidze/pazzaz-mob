@@ -10,11 +10,15 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LanguageComponent } from './language/language.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
+import { ViewDetailsComponent } from './view-details/view-details.component';
+// import { FilterPipe } from './pipes/filter.pipe';
+
+
 
 
 
 @NgModule({
-  declarations: [AppComponent,LanguageComponent,LoginComponent],
+  declarations: [AppComponent,LanguageComponent,LoginComponent,ViewDetailsComponent],
   imports: [BrowserModule,FormsModule, IonicModule.forRoot(),
            AppRoutingModule,
            HttpClientModule,

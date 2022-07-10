@@ -14,17 +14,33 @@
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
+    <form #searchForm='ngForm' >
     <ion-toolbar>
-      <ion-title size="medium">Home</ion-title>
+      <ion-item>
+        <ion-input 
+                    [(ngModel)]="field.search"
+                     required
+                     name="search"
+                     #itemSearch="ngModel"
+                    placeholder="search">
+        </ion-input>
+        <ion-icon (click)="search(searchForm)"  style="margin-right:20px;font-size: small;" name="search-outline"></ion-icon>
+      </ion-item>
+            
+      <div style="margin-top:5px;color: red;" *ngIf="searchForm.submitted&&itemSearch.errors?.required">
+        შეიყვანეთ მომხმარებელი
+    </div>
+      <!-- <ion-title size="medium">Home</ion-title> -->
 
     </ion-toolbar>
+  </form>
   </ion-header>
   <div class="item-content">
-    <div class="item-list" *ngFor="let item of products">
+    <div  class="item-list" *ngFor="let item of products|filter:field.search:'itemName'"  [routerLink]="['/viewDetails',item.itemId]">
       {{item.itemName}}
       <img [src]="item.image" alt="">
-      {{item.newPrice}} ₾
-      <ng-container style="text-decoration: line-through;">{{item.oldPrice}} ₾</ng-container>
+      <span style="text-decoration: line-through;color:red">{{item.oldPrice}} ₾</span>
+      <span>{{item.newPrice}} ₾</span>
     </div>
 
 

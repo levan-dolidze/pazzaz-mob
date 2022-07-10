@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LanguageComponent } from '../language/language.component';
 import { LoginComponent } from '../login/login.component';
+import { ViewDetailsComponent } from '../view-details/view-details.component';
+
 import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
@@ -33,9 +35,16 @@ const routes: Routes = [
       {
         path: "login",
         component: LoginComponent,
-      }
-  
+      },
+      {
+        path: "viewDetails",
+        component: ViewDetailsComponent,
+      },
     ]
+  },
+  {
+    path: "viewDetails/:id",
+    component: ViewDetailsComponent,
   },
   {
     path: '',

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { HttpService } from '../services/http.service';
+import { Field } from '../shared/classes';
 import { ProductModel } from '../shared/models';
 
 @Component({
@@ -11,11 +13,16 @@ import { ProductModel } from '../shared/models';
 export class Tab1Page implements OnInit {
 
   constructor(private menu: MenuController,
-    private http: HttpService) { }
+    private http: HttpService, private router: ActivatedRoute) { }
 
-  products: ProductModel[]
+  products: ProductModel[];
+  field: Field = new Field();
+ 
 
   ngOnInit(): void {
+    this.field.search='';
+    
+
     this.returnProducts();
 
   }
@@ -42,7 +49,15 @@ export class Tab1Page implements OnInit {
   }
 
 
+  search(form) {
+    if(form.invalid){
+      return
+    }
+    else{
+      console.log(form)
 
+    }
+  }
 
 
 
