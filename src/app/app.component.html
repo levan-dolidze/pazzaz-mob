@@ -9,21 +9,18 @@
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item (click)="login()" >
-          <ion-icon name="log-in-outline" slot="start"></ion-icon>
-          <ion-label >{{"login"|translate}}</ion-label>
+        <ion-item  (click)="login()">
+            <ion-icon name="log-in-outline" slot="start"></ion-icon>
+            <ion-label  >{{"login"|translate}}</ion-label>
         </ion-item>
-        <ion-item>
+        <ion-item (click)="goToProducts()">
           <ion-icon name="heart" slot="start"></ion-icon>
           <ion-label>{{"products"|translate}}</ion-label>
         </ion-item>
-        <!-- <ion-item>
-          <ion-icon name="contacts" slot="start"></ion-icon>
-           <ion-label>Contact</ion-label>
-        </ion-item> -->
-        <ion-item (click)="languagePanel()">
-          <ion-icon name="settings" slot="start"></ion-icon>
-          <ion-label>{{"language"|translate}}</ion-label>
+     
+        <ion-item (click)="languagePanel()" >
+          <ion-icon  name="settings" slot="start"></ion-icon>
+          <ion-label >{{"language"|translate}}</ion-label>
         </ion-item>
       </ion-list>
     </ion-content>

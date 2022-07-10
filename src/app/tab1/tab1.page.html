@@ -27,15 +27,13 @@
         <ion-icon (click)="search(searchForm)"  style="margin-right:20px;font-size: small;" name="search-outline"></ion-icon>
       </ion-item>
             
-      <div style="margin-top:5px;color: red;" *ngIf="searchForm.submitted&&itemSearch.errors?.required">
-        შეიყვანეთ მომხმარებელი
-    </div>
+   
       <!-- <ion-title size="medium">Home</ion-title> -->
 
     </ion-toolbar>
   </form>
   </ion-header>
-  <div class="item-content">
+  <div  class="item-content">
     <div  class="item-list" *ngFor="let item of products|filter:field.search:'itemName'"  [routerLink]="['/viewDetails',item.itemId]">
       {{item.itemName}}
       <img [src]="item.image" alt="">

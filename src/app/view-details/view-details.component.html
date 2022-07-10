@@ -1,10 +1,12 @@
-<div class="view-details-content" *ngIf="selectedItemArr">
+
+<div style="overflow:auto;" class="view-details-content" *ngIf="selectedItemArr">
   <div class="view-details-inner" *ngFor="let item of selectedItemArr">
-  <h2>{{item.itemName}}</h2>  
+    <ion-icon [routerLink]="['']" name="chevron-back-outline"></ion-icon>
+    <h2>{{item.itemName}}</h2>  
      <img [src]="item.image" alt="">
      <div style="margin-top:10px;">
-      <span style="text-decoration: line-through;color:red">{{item.oldPrice}} ₾</span>
-      <span style="font-size:large">{{item.newPrice}} ₾</span>
+      <span style="text-decoration: line-through;color:red"> ფასი: ₾ {{item.oldPrice}} </span>
+      <span style="font-size:large;margin-left: 10px;">ახალი ფასი: ₾ {{item.newPrice}} </span>
      </div>
 
      <div class="description-content">
@@ -12,13 +14,14 @@
       <li>კატეგორია: {{item.type}}</li>
       <li>მატერია: {{item.material}}</li>
       <li>ფერი: {{item.color}} </li>
+      <li>სქესი: {{item.gender}}</li>
       <li>ქუსლის ზომა: {{item.hill}}</li>
     </div>
   
   </div>
-
 </div>
+<ion-button style="margin-top:10px" class="subscribe-btn" (click)="subscribe()" color="danger">Subscribe</ion-button>
 
 
-<ion-button (click)="subscribe()" color="danger">Subscribe</ion-button>
+
 

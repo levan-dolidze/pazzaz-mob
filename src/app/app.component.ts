@@ -44,4 +44,10 @@ export class AppComponent implements OnInit {
     this.closeMenu();
 
   }
+  goToProducts(){
+    this.closeMenu();
+    this.router.navigate(['/tabs/tab1'])
+
+
+  }
 };
