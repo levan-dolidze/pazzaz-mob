@@ -11,6 +11,7 @@ import { LanguageComponent } from './language/language.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { ViewDetailsComponent } from './view-details/view-details.component';
+import { RegistrationComponent } from './registration/registration.component';
 // import { FilterPipe } from './pipes/filter.pipe';
 
 
@@ -18,7 +19,7 @@ import { ViewDetailsComponent } from './view-details/view-details.component';
 
 
 @NgModule({
-  declarations: [AppComponent,LanguageComponent,LoginComponent,ViewDetailsComponent],
+  declarations: [AppComponent,LanguageComponent,LoginComponent,ViewDetailsComponent,RegistrationComponent],
   imports: [BrowserModule,FormsModule, IonicModule.forRoot(),
            AppRoutingModule,
            HttpClientModule,

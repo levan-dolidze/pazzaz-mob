@@ -27,6 +27,7 @@
       <div style="margin-top:5px;color: red;"*ngIf="userLoginForm.submitted&&userPassword.errors?.required">
         შეიყვანეთ პაროლი
     </div>
+    <p [routerLink]="['/tabs/registration']" >რეგისტრაცია</p>
       <ion-button type="submit" class="login-btn" color="primary">sign in</ion-button>
 
     </form>

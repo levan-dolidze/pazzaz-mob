@@ -1,0 +1,57 @@
+<h1 style="text-align:center;padding:50px">Sign Up</h1>
+<div class="signup-content">
+
+  <div class="signup-inner">
+    <form (ngSubmit)="registration(registrFrom)" #registrFrom="ngForm">
+      <ion-item>
+        <ion-input [(ngModel)]="field.name" 
+                   name="username"
+                   #name="ngModel"
+                   required
+                   placeholder="Name">
+        </ion-input>
+      </ion-item>
+      
+      <div style="margin-top:5px;color: red;" *ngIf="registrFrom.submitted&&name.errors?.required">
+        შეიყვანეთ სახელი
+    </div>
+      <ion-item>
+        <ion-input [(ngModel)]="field.surname" 
+        required
+        name="surname"
+        #userSurname="ngModel"
+        placeholder="Surname">
+        </ion-input>
+      </ion-item>
+      <div style="margin-top:5px;color: red;"*ngIf="registrFrom.submitted&&userPassword.errors?.required">
+        შეიყვანეთ გვარი
+    </div>
+
+    <ion-item>
+      <ion-input [(ngModel)]="field.username" 
+      required
+      name="password"
+      #userEmail="ngModel"
+      placeholder="Email">
+      </ion-input>
+    </ion-item>
+    <div style="margin-top:5px;color: red;"*ngIf="registrFrom.submitted&&userPassword.errors?.required">
+      შეიყვანეთ იმეილი
+  </div>
+    <ion-item>
+      <ion-input [(ngModel)]="field.password" 
+      required
+      name="password"
+      #userPassword="ngModel"
+      placeholder="Password">
+      </ion-input>
+    </ion-item>
+    <div style="margin-top:5px;color: red;"*ngIf="registrFrom.submitted&&userPassword.errors?.required">
+      შეიყვანეთ პაროლი
+  </div>
+
+
+      <ion-button type="submit" class="login-btn" color="primary">Sign Up</ion-button>
+    </form>
+  </div>
+</div>
