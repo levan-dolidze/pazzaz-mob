@@ -13,6 +13,9 @@ import { FormsModule } from '@angular/forms';
 import { ViewDetailsComponent } from './view-details/view-details.component';
 import { RegistrationComponent } from './registration/registration.component';
 // import { FilterPipe } from './pipes/filter.pipe';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';
+
 
 
 
@@ -23,6 +26,7 @@ import { RegistrationComponent } from './registration/registration.component';
   imports: [BrowserModule,FormsModule, IonicModule.forRoot(),
            AppRoutingModule,
            HttpClientModule,
+           AngularFireModule.initializeApp(environment.firebase),
            TranslateModule.forRoot({
            loader: {
              provide: TranslateLoader,

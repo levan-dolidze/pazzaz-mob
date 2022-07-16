@@ -14,7 +14,6 @@ export class HttpService {
 
 
   getProducts(): Observable<ProductModel[]> {
-
     const productDammy = [{
       itemId: 121,
       itemName: 'Ecco tred',
