@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+import { FirebaseAuthService } from './services/firebase-auth.service';
 import { SharedService } from './shared/shared.service';
 
 @Component({
@@ -14,20 +15,52 @@ export class AppComponent implements OnInit {
   constructor(private router: Router,
     private menu: MenuController,
     private translate: TranslateService,
-    private shared:SharedService,
+    private shared: SharedService,
+    private firebaseAuth: FirebaseAuthService
 
   ) { }
   showPanel: boolean = false;
   lang: any;
+  userLoggedIn: boolean;
 
   ngOnInit() {
+
+    this.checkUserLoggedIn()
     this.lang = localStorage.getItem('lang');
     this.shared.languageControl(this.lang, this.translate);
-        this.shared.changeLanguageEvent.subscribe(() => {
+    this.shared.changeLanguageEvent.subscribe(() => {
       this.lang = localStorage.getItem('lang');
       this.shared.languageControl(this.lang, this.translate);
     })
   }
+
+  logOut() {
+    this.firebaseAuth.logOut();
+    this.userLoggedIn=false;
+    window.location.reload();
+
+  }
+
+
+  checkUserLoggedIn() {
+    let tokenInfo = localStorage.getItem('user');
+    if (tokenInfo) {
+      this.userLoggedIn = true;
+    } else {
+      this.userLoggedIn = false;
+    };
+  };
+
+
+
+
+
+
+
+
+
+
+
 
 
   languagePanel() {
@@ -39,12 +72,12 @@ export class AppComponent implements OnInit {
     this.menu.close();
   };
 
-  login(){
+  login() {
     this.router.navigate(['/tabs/login'])
     this.closeMenu();
 
   }
-  goToProducts(){
+  goToProducts() {
     this.closeMenu();
     this.router.navigate(['/tabs/tab1'])
 

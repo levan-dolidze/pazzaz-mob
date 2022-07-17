@@ -11,8 +11,8 @@ import { Field } from '../shared/classes';
 export class LoginComponent implements OnInit {
   field: Field = new Field();
   constructor(private firebaseAuth: FirebaseAuthService,
-    private router:Router
-    ) { }
+    private router: Router
+  ) { }
 
   ngOnInit() { }
 
@@ -24,6 +24,8 @@ export class LoginComponent implements OnInit {
     else {
       await this.firebaseAuth.signIn(this.field.username, this.field.password);
       this.router.navigate(['/tabs/tab1'])
+      // window.location.reload();
+
     }
 
   }
