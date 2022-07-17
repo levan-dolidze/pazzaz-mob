@@ -41,7 +41,7 @@ export class RegistrationComponent implements OnInit {
       // this.presentToast();
       setTimeout(() => {
         this.router.navigate(['/tabs/tab1'])
-        this.welcome! =this.welcome;
+        this.welcome! = this.welcome;
 
 
       }, 3000);

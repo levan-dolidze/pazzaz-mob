@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../auth.guard';
+import { IsUserLoggedInGuard } from '../is-user-logged-in.guard';
 import { LanguageComponent } from '../language/language.component';
 import { LoginComponent } from '../login/login.component';
+import { MySubscribtionComponent } from '../my-subscribtion/my-subscribtion.component';
 import { RegistrationComponent } from '../registration/registration.component';
 import { ViewDetailsComponent } from '../view-details/view-details.component';
 
@@ -36,6 +39,7 @@ const routes: Routes = [
       {
         path: "login",
         component: LoginComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: "registration",
@@ -44,6 +48,12 @@ const routes: Routes = [
       {
         path: "viewDetails",
         component: ViewDetailsComponent,
+      },
+      {
+        path: "my-subscribtion",
+        component: MySubscribtionComponent,
+        canActivate:[IsUserLoggedInGuard]
+
       },
     ]
   },
@@ -61,4 +71,4 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }
