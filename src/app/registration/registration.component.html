@@ -13,7 +13,7 @@
           </ion-input>
         </ion-item>
         
-        <div style="margin-top:5px;color: red;" *ngIf="registrFrom.submitted&&name.errors?.required">
+        <div style="margin-top:5px;color: red;font-size: small;" *ngIf="registrFrom.submitted&&name.errors?.required">
           შეიყვანეთ სახელი
       </div>
         <ion-item>
@@ -24,7 +24,7 @@
           placeholder="Surname">
           </ion-input>
         </ion-item>
-        <div style="margin-top:5px;color: red;"*ngIf="registrFrom.submitted&&userPassword.errors?.required">
+        <div style="margin-top:5px;color: red;font-size: small;"*ngIf="registrFrom.submitted&&userPassword.errors?.required">
           შეიყვანეთ გვარი
       </div>
   
@@ -36,7 +36,7 @@
         placeholder="Email">
         </ion-input>
       </ion-item>
-      <div style="margin-top:5px;color: red;"*ngIf="registrFrom.submitted&&userPassword.errors?.required">
+      <div style="margin-top:5px;color: red;font-size: small;" *ngIf="registrFrom.submitted&&userPassword.errors?.required">
         შეიყვანეთ იმეილი
     </div>
       <ion-item>
@@ -47,7 +47,7 @@
         placeholder="Password">
         </ion-input>
       </ion-item>
-      <div style="margin-top:5px;color: red;"*ngIf="registrFrom.submitted&&userPassword.errors?.required">
+      <div style="margin-top:5px;color: red;font-size: small;" *ngIf="registrFrom.submitted&&userPassword.errors?.required">
         შეიყვანეთ პაროლი
     </div>
   
