@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
-import { from } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { HttpService } from '../services/http.service';
+import { ProductModel } from '../shared/models';
 import { SharedService } from '../shared/shared.service';
+import { filter, toArray } from 'rxjs/operators';
 
 @Component({
   selector: 'app-view-details',
@@ -21,40 +23,43 @@ export class ViewDetailsComponent implements OnInit {
 
   ) { }
 
-  selectedItemArr: any;
+  selectedItemArr$: Observable<ProductModel[]>;
   ngOnInit() {
-
     const id = this.router.snapshot.paramMap.get('id');
     this.returnSelectedItem(id)
   }
 
   returnSelectedItem(id: any) {
-    this.http.getProducts().subscribe((res) => {
-      const filt = res.filter((item) => {
-        return item.itemId == id
+    this.selectedItemArr$ = this.http.getProducts();
+    this.selectedItemArr$.subscribe((res) => {
+      from(res).pipe(
+        filter((x => x.itemId == id)),
+        toArray()
+      ).subscribe((res) => {
+        console.log(res)
+        this.selectedItemArr$ = of(res)
+
       })
-      this.selectedItemArr = filt
     })
   };
 
   subscribe() {
-    let inString = JSON.stringify(this.selectedItemArr);
-    localStorage.setItem('subscribedItems', inString);
+    // let inString = JSON.stringify(this.selectedItemArr$);
+    // localStorage.setItem('subscribedItems', inString);
     this.shared.userAuthCheckong().subscribe((res) => {
-      console.log(res)
       if (res) {
-        // this.buscribtionMessage();
-       this.presentToast()
-       setTimeout(() => {
-        this.rout.navigate(['/tabs/tab1'])
-       }, 3000);
-
-
+        this.presentToast()
+        this.selectedItemArr$.subscribe((res)=>{
+          this.http.addSubscribtion(res).subscribe()
+        })
+        setTimeout(() => {
+          this.rout.navigate(['/tabs/tab1'])
+        }, 3000);
       } else {
         this.rout.navigate(['/tabs/login'])
       }
     })
-  }
+  };
 
   async presentToast() {
     const toast = await this.toastController.create({

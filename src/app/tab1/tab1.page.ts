@@ -38,14 +38,12 @@ export class Tab1Page implements OnInit {
     shareReplay()
   };
 
-
   producstOnUI() {
     this.returnProducts();
     this.items$.subscribe((res) => {
       this.products$ = of(res.slice(0, this.itemLength))
     })
   };
-
 
   doInfinite(infiniteScroll) {
     this.itemLength += 6;
@@ -54,8 +52,6 @@ export class Tab1Page implements OnInit {
       this.infiniteScroll.complete();
     }, 500);
   }
-
-
 
 
 
