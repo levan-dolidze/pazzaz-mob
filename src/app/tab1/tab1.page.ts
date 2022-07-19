@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonInfiniteScroll, MenuController } from '@ionic/angular';
+import { from, Observable, of } from 'rxjs';
+import { filter, shareReplay, toArray } from 'rxjs/operators';
 import { HttpService } from '../services/http.service';
 import { Field } from '../shared/classes';
 import { ProductModel } from '../shared/models';
@@ -18,14 +20,36 @@ export class Tab1Page implements OnInit {
 
   }
   @ViewChild(IonInfiniteScroll, { static: false }) infiniteScroll: IonInfiniteScroll;
-  products:ProductModel[];
+  products$: Observable<ProductModel[]>
+  items$: Observable<ProductModel[]>;
 
   field: Field = new Field();
   itemLength: any = 6;
-  
-  doInfinite(infiniteScroll) {
-    this.itemLength += 6
+
+
+
+  ngOnInit(): void {
+    this.field.search = '';
+    this.producstOnUI();
+
+  }
+  returnProducts() {
+    this.items$ = this.http.getProducts().pipe();
+    shareReplay()
+  };
+
+
+  producstOnUI() {
     this.returnProducts();
+    this.items$.subscribe((res) => {
+      this.products$ = of(res.slice(0, this.itemLength))
+    })
+  };
+
+
+  doInfinite(infiniteScroll) {
+    this.itemLength += 6;
+    this.producstOnUI();
     setTimeout(() => {
       this.infiniteScroll.complete();
     }, 500);
@@ -33,27 +57,6 @@ export class Tab1Page implements OnInit {
 
 
 
-
-
-  ngOnInit(): void {
-    this.field.search = '';
-    this.returnProducts();
-
-  }
-  returnProducts() {
-    this.http.getProducts().subscribe((res) => {
-      let items = res;
-      this.products = items.slice(0, this.itemLength);
-    })
-
-
-
-
-
-
-
-
-  }
 
 
   openFirst() {
@@ -70,13 +73,25 @@ export class Tab1Page implements OnInit {
     this.menu.open('custom');
   };
 
+  filtering(){
+    this.items$.subscribe((res)=>{
+    this.products$=of(res)
+    })
+  }
 
   search(form) {
     if (form.invalid) {
       return
     }
     else {
-      console.log(form)
+      this.items$.subscribe((res) => {
+        from(res).pipe(
+          filter((x => x.itemName === this.field.search)),
+          toArray()
+        ).subscribe((res) => {
+          this.products$ = of(res)
+        })
+      })
     };
   };
 

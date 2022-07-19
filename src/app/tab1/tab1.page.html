@@ -13,7 +13,9 @@
                          required
                          name="search"
                          #itemSearch="ngModel"
-                        placeholder="search">
+                        placeholder="search"
+                        (ngModelChange)="filtering()"
+                        >
             </ion-input>
             <ion-icon (click)="search(searchForm)"  style="margin-right:10px;font-size: small;" name="search-outline"></ion-icon>
           </ion-item>
@@ -34,7 +36,7 @@
   </ion-header>
   <div  class="item-content">
 
-    <div  class="item-list" *ngFor="let item of products|filter:field.search:'itemName'"  [routerLink]="['/viewDetails',item.itemId]">
+    <div  class="item-list" *ngFor="let item of (products$|async)|filter:field.search:'itemName'"  [routerLink]="['/viewDetails',item.itemId]">
       {{item.itemName}}
       <img [src]="item.image" alt="">
       <span style="text-decoration: line-through;color:red">{{item.oldPrice}} ₾</span>
