@@ -13,8 +13,10 @@ import { filter, toArray, shareReplay } from 'rxjs/operators';
 export class MySubscribtionComponent implements OnInit {
 
   subscribedItems$: Observable<ProductModel>
-  items$:Array<ProductModel> =[];
-  arr: Array<any> = []
+  items$: Array<ProductModel> = [];
+  parsedItemData: Array<ProductModel> = []
+
+  userUID: any
   constructor(private http: HttpService,
     private shared: SharedService,
 
@@ -23,22 +25,34 @@ export class MySubscribtionComponent implements OnInit {
 
   ngOnInit() {
     this.returnSubscribedItems()
-
-  }
+  };
 
   returnSubscribedItems() {
     this.subscribedItems$ = this.http.getSubscribtionItems();
     this.subscribedItems$.subscribe((res) => {
-        let kk=Object.values(res);
-      for (let index = 0; index < kk.length; index++) {
-       this.items$.push(kk[index][0]) 
-
+      if (res) {
+        let itemDataAll = Object.values(res);
+        for (let i = 0; i < itemDataAll.length; i++) {
+          if (itemDataAll[i][0]) {
+            this.parsedItemData.push(itemDataAll[i][0])
+          }
+          this.shared.returnAuthModel().subscribe((res) => {
+            if (res) {
+              this.userUID = res;
+              from(this.parsedItemData).pipe(
+                filter((x => x.userUID == this.userUID.uid)),
+                toArray()
+              ).subscribe((res) => {
+                this.items$ = res
+                this.shared.itemQTYEvent.next(this.items$.length)
+              })
+            }
+            return
+          })
+        }
       }
-      // this.arr.push(res)
-      // console.log(this.arr)
-
+      return
     })
+  };
 
-  }
-
-}
+};

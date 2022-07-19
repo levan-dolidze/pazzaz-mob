@@ -6,6 +6,7 @@ import { filter, shareReplay, toArray } from 'rxjs/operators';
 import { HttpService } from '../services/http.service';
 import { Field } from '../shared/classes';
 import { ProductModel } from '../shared/models';
+import { SharedService } from '../shared/shared.service';
 
 @Component({
   selector: 'app-tab1',
@@ -15,7 +16,10 @@ import { ProductModel } from '../shared/models';
 export class Tab1Page implements OnInit {
 
   constructor(private menu: MenuController,
-    private http: HttpService, private router: ActivatedRoute) {
+    private http: HttpService,
+    private router: ActivatedRoute,
+    private shared: SharedService
+  ) {
 
 
   }
@@ -25,19 +29,26 @@ export class Tab1Page implements OnInit {
 
   field: Field = new Field();
   itemLength: any = 6;
-
+  subscribtedItemQTY:number;
 
 
   ngOnInit(): void {
-    this.field.search = '';
+    this.returnItemQTY();
     this.producstOnUI();
-
-  }
+    this.field.search = '';
+  };
   returnProducts() {
     this.items$ = this.http.getProducts().pipe();
     shareReplay()
   };
 
+  returnItemQTY() {
+    this.shared.itemQTYEvent.subscribe((QTY) => {
+      console.log(QTY)
+      this.subscribtedItemQTY = QTY
+
+    })
+  }
   producstOnUI() {
     this.returnProducts();
     this.items$.subscribe((res) => {
@@ -69,9 +80,9 @@ export class Tab1Page implements OnInit {
     this.menu.open('custom');
   };
 
-  filtering(){
-    this.items$.subscribe((res)=>{
-    this.products$=of(res)
+  filtering() {
+    this.items$.subscribe((res) => {
+      this.products$ = of(res)
     })
   }
 

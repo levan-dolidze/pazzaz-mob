@@ -10,7 +10,7 @@ export class SharedService {
 
   changeLanguageEvent: Subject<any> = new Subject();
   authStatusChange: Subject<any> = new Subject();
-
+  itemQTYEvent: Subject<any> = new Subject();
 
   languageControl(lang: any, translate: any) {
     lang = localStorage.getItem('lang');
@@ -26,4 +26,22 @@ export class SharedService {
       return of(false)
     }
   }
+
+  returnAuthModel(): Observable<any> {
+    let token = localStorage.getItem('user');
+    if (token) {
+      return of(JSON.parse(token))
+    }
+    else {
+      return of(false)
+    };
+
+  };
+
+
+
+
+
+
+
 }

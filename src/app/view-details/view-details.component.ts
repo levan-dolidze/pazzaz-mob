@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 import { from, Observable, of } from 'rxjs';
 import { HttpService } from '../services/http.service';
+import { Field } from '../shared/classes';
 import { ProductModel } from '../shared/models';
 import { SharedService } from '../shared/shared.service';
 import { filter, toArray } from 'rxjs/operators';
@@ -36,7 +37,6 @@ export class ViewDetailsComponent implements OnInit {
         filter((x => x.itemId == id)),
         toArray()
       ).subscribe((res) => {
-        console.log(res)
         this.selectedItemArr$ = of(res)
 
       })

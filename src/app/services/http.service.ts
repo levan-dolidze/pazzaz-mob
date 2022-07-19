@@ -1,9 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { from, Observable, of } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { ProductModel } from '../shared/models';
 import { SharedService } from '../shared/shared.service';
+import { toArray, shareReplay } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +15,7 @@ export class HttpService {
 
   apiUrl = environment.apiUrl;
   userUID: any;
+
   constructor(private http: HttpClient, private shared: SharedService) { }
 
 
@@ -24,8 +28,10 @@ export class HttpService {
         return
       }
     })
-    return this.userUID.uid
+    return this.userUID?.uid
   }
+
+
 
   getProducts(): Observable<ProductModel[]> {
     const productDammy = [{
@@ -127,9 +133,13 @@ export class HttpService {
     return this.http.post(`${this.apiUrl}`, subscribtion)
   }
 
-  getSubscribtionItems():Observable<ProductModel> {
+  getSubscribtionItems(): Observable<ProductModel> {
     return this.http.get<ProductModel>(`${this.apiUrl}`)
-  }
+  };
+
+
+
+
 
 
 }
