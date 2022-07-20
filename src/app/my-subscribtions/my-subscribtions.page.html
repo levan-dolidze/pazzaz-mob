@@ -1,0 +1,84 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="medium">my subscribtions</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <!-- <div *ngIf="items$">
+    <div *ngFor="let i of items$" >
+      {{i.itemName}}
+      <img [src]="i.image" alt="">
+      </div>
+      
+  </div> -->
+
+
+
+
+
+
+
+
+
+  <div class="subscribtions-incart-content">
+    <div *ngIf="items$">
+      <div class="subscribtions-incart-list">
+        <div class="subscribtions-incart-inner" *ngFor="let item of items$;let i =index">
+          <img [src]="item.image">
+          Name:
+          <span>
+            {{item.itemName}}
+          </span>
+          Brand:
+          <span>
+            {{item.brand}}
+          </span>
+          Price:
+          <span>
+            {{item.oldPrice}}
+          </span>
+          <ion-icon (click)="presentActionSheet(i)" style="float:right;cursor:pointer;opacity:0.8;" name="trash-outline"></ion-icon>
+
+        </div>
+
+      </div>
+    </div>
+    
+
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ion-content>

@@ -4,7 +4,6 @@ import { AuthGuard } from '../auth.guard';
 import { IsUserLoggedInGuard } from '../is-user-logged-in.guard';
 import { LanguageComponent } from '../language/language.component';
 import { LoginComponent } from '../login/login.component';
-import { MySubscribtionComponent } from '../my-subscribtion/my-subscribtion.component';
 import { RegistrationComponent } from '../registration/registration.component';
 import { ViewDetailsComponent } from '../view-details/view-details.component';
 
@@ -36,6 +35,11 @@ const routes: Routes = [
         path: 'notification',
         loadChildren: () => import('../notification/notification.module').then( m => m.NotificationPageModule)
       },
+      {
+        path: 'my-subscribtions',
+        loadChildren: () => import('../my-subscribtions/my-subscribtions.module').then( m => m.MySubscribtionsPageModule),
+        canActivate:[IsUserLoggedInGuard]
+      },
     
       {
         path: "language",
@@ -53,13 +57,8 @@ const routes: Routes = [
       {
         path: "viewDetails",
         component: ViewDetailsComponent,
-      },
-      {
-        path: "my-subscribtion",
-        component: MySubscribtionComponent,
-        canActivate:[IsUserLoggedInGuard]
-
-      },
+      }
+  
     ]
   },
   {

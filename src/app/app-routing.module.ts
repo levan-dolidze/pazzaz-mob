@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
+  },  {
+    path: 'my-subscribtions',
+    loadChildren: () => import('./my-subscribtions/my-subscribtions.module').then( m => m.MySubscribtionsPageModule)
   }
+
 
 
 

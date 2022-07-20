@@ -15,7 +15,6 @@ import { RegistrationComponent } from './registration/registration.component';
 // import { FilterPipe } from './pipes/filter.pipe';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
-import { MySubscribtionComponent } from './my-subscribtion/my-subscribtion.component';
 
 
 
@@ -23,7 +22,7 @@ import { MySubscribtionComponent } from './my-subscribtion/my-subscribtion.compo
 
 
 @NgModule({
-  declarations: [AppComponent,LanguageComponent,LoginComponent,ViewDetailsComponent,RegistrationComponent,MySubscribtionComponent],
+  declarations: [AppComponent,LanguageComponent,LoginComponent,ViewDetailsComponent,RegistrationComponent],
   imports: [BrowserModule,FormsModule, IonicModule.forRoot(),
            AppRoutingModule,
            HttpClientModule,

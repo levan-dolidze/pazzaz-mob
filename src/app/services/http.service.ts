@@ -137,7 +137,10 @@ export class HttpService {
     return this.http.get<ProductModel>(`${this.apiUrl}`)
   };
 
+  deleteSubscribedItem(id) {
+    return this.http.delete(`${this.apiUrl}`,id)
 
+  }
 
 
 

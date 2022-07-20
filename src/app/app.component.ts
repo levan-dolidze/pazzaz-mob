@@ -57,7 +57,7 @@ export class AppComponent implements OnInit {
 
   mySubscribtion() {
     this.menu.close();
-    this.router.navigate(['/tabs/my-subscribtion'])
+    this.router.navigate(['/tabs/my-subscribtions'])
 
   }
 
