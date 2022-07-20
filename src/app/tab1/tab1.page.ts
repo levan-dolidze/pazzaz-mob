@@ -29,11 +29,9 @@ export class Tab1Page implements OnInit {
 
   field: Field = new Field();
   itemLength: any = 6;
-  subscribtedItemQTY:number;
 
 
   ngOnInit(): void {
-    this.returnItemQTY();
     this.producstOnUI();
     this.field.search = '';
   };
@@ -42,13 +40,7 @@ export class Tab1Page implements OnInit {
     shareReplay()
   };
 
-  returnItemQTY() {
-    this.shared.itemQTYEvent.subscribe((QTY) => {
-      console.log(QTY)
-      this.subscribtedItemQTY = QTY
 
-    })
-  }
   producstOnUI() {
     this.returnProducts();
     this.items$.subscribe((res) => {

@@ -44,7 +44,6 @@ export class MySubscribtionComponent implements OnInit {
                 toArray()
               ).subscribe((res) => {
                 this.items$ = res
-                this.shared.itemQTYEvent.next(this.items$.length)
               })
             }
             return

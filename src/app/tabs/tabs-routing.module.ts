@@ -33,6 +33,11 @@ const routes: Routes = [
         loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
       },
       {
+        path: 'notification',
+        loadChildren: () => import('../notification/notification.module').then( m => m.NotificationPageModule)
+      },
+    
+      {
         path: "language",
         component: LanguageComponent,
       },
