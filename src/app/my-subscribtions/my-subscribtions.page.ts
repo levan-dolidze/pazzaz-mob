@@ -14,8 +14,8 @@ import { SharedService } from '../shared/shared.service';
 export class MySubscribtionsPage implements OnInit {
 
   constructor(private http: HttpService,
-    public actionSheetController: ActionSheetController,
-    private shared: SharedService,) { }
+  public actionSheetController: ActionSheetController,
+  private shared: SharedService,) { }
 
   subscribedItems$: Observable<ProductModel>
   items$: Array<ProductModel> = [];
@@ -25,7 +25,7 @@ export class MySubscribtionsPage implements OnInit {
 
   ngOnInit() {
     this.returnSubscribedItems();
-
+    
 
   }
 
@@ -60,7 +60,7 @@ export class MySubscribtionsPage implements OnInit {
   deleteSubscribtion(itemId: any) {
 
     this.items$.splice(itemId, 1)
-    this.http.deleteSubscribedItem(itemId).subscribe(() => {
+    this.http.deleteSubscribedItem(itemId).subscribe(()=>{
 
     })
 
@@ -87,7 +87,7 @@ export class MySubscribtionsPage implements OnInit {
         handler: () => {
           console.log('Delete clicked');
         }
-
+      
       }, {
         text: 'Cancel',
         icon: 'close',
@@ -99,7 +99,8 @@ export class MySubscribtionsPage implements OnInit {
     });
     await actionSheet.present();
     const { role, data } = await actionSheet.onDidDismiss();
-    if (data.type == 'delete') {
+    console.log('onDidDismiss resolved with role and data', role, data);
+    if(data?.type=='delete'){
       this.deleteSubscribtion(i)
     }
   }
