@@ -5,7 +5,6 @@ import { IsUserLoggedInGuard } from '../is-user-logged-in.guard';
 import { LanguageComponent } from '../language/language.component';
 import { LoginComponent } from '../login/login.component';
 import { RegistrationComponent } from '../registration/registration.component';
-import { ViewDetailsComponent } from '../view-details/view-details.component';
 
 import { TabsPage } from './tabs.page';
 
@@ -40,6 +39,10 @@ const routes: Routes = [
         loadChildren: () => import('../my-subscribtions/my-subscribtions.module').then( m => m.MySubscribtionsPageModule),
         canActivate:[IsUserLoggedInGuard]
       },
+      {
+        path: 'details/:id',
+        loadChildren: () => import('../details/details.module').then( m => m.DetailsPageModule)
+      },
     
       {
         path: "language",
@@ -54,17 +57,11 @@ const routes: Routes = [
         path: "registration",
         component: RegistrationComponent,
       },
-      {
-        path: "viewDetails",
-        component: ViewDetailsComponent,
-      }
+  
   
     ]
   },
-  {
-    path: "viewDetails/:id",
-    component: ViewDetailsComponent,
-  },
+  
   {
     path: '',
     redirectTo: '/tabs/tab1',

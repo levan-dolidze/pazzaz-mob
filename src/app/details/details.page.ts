@@ -2,33 +2,30 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 import { from, Observable, of } from 'rxjs';
+import { filter, toArray } from 'rxjs/operators';
 import { HttpService } from '../services/http.service';
-import { Field } from '../shared/classes';
 import { ProductModel } from '../shared/models';
 import { SharedService } from '../shared/shared.service';
-import { filter, toArray } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-view-details',
-  templateUrl: './view-details.component.html',
-  styleUrls: ['./view-details.component.scss'],
+  selector: 'app-details',
+  templateUrl: './details.page.html',
+  styleUrls: ['./details.page.scss'],
 })
-export class ViewDetailsComponent implements OnInit {
+export class DetailsPage implements OnInit {
 
   constructor(private router: ActivatedRoute,
     private http: HttpService,
     private alertController: AlertController,
     private shared: SharedService,
     private rout: Router,
-    public toastController: ToastController
+    public toastController: ToastController) { }
+    selectedItemArr$: Observable<ProductModel[]>;
 
-  ) { }
-
-  selectedItemArr$: Observable<ProductModel[]>;
   ngOnInit() {
     const id = this.router.snapshot.paramMap.get('id');
     this.returnSelectedItem(id)
-  }
+  };
 
   returnSelectedItem(id: any) {
     this.selectedItemArr$ = this.http.getProducts();
@@ -43,6 +40,8 @@ export class ViewDetailsComponent implements OnInit {
     })
   };
 
+
+  
   subscribe() {
     // let inString = JSON.stringify(this.selectedItemArr$);
     // localStorage.setItem('subscribedItems', inString);
@@ -60,6 +59,9 @@ export class ViewDetailsComponent implements OnInit {
       }
     })
   };
+
+
+
 
   async presentToast() {
     const toast = await this.toastController.create({
@@ -82,4 +84,4 @@ export class ViewDetailsComponent implements OnInit {
     await alert.present();
   }
 
-}
+};

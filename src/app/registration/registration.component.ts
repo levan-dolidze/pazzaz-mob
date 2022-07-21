@@ -4,6 +4,7 @@ import { AlertController } from '@ionic/angular';
 import { FirebaseAuthService } from '../services/firebase-auth.service';
 import { Registr } from '../shared/classes';
 import { ToastController } from '@ionic/angular';
+import { SharedService } from '../shared/shared.service';
 
 @Component({
   selector: 'app-registration',
@@ -15,7 +16,8 @@ export class RegistrationComponent implements OnInit {
   constructor(private firebaseAuth: FirebaseAuthService,
     private router: Router,
     private alertController: AlertController,
-    public toastController: ToastController
+    public toastController: ToastController,
+    private shared:SharedService
 
   ) { }
 
@@ -27,32 +29,28 @@ export class RegistrationComponent implements OnInit {
 
 
 
-
-
-
-
-
   async signUp(form: any) {
     if (form.invalid) {
       return
     } else {
       await this.firebaseAuth.signUp(this.field.username, this.field.password);
       this.welcome = true;
-      // this.presentToast();
       setTimeout(() => {
-        this.router.navigate(['/tabs/tab1'])
-        this.welcome! = this.welcome;
-
+        this.userLogin();
 
       }, 3000);
-
-      // 
-
-      // if (this.firebase.isLoggedIn) this.authServise.userIsLogedin.next(true)
-      // this.verifyEmail();
     }
 
   };
+
+
+  async userLogin() {
+      await this.firebaseAuth.signIn(this.field.username, this.field.password);
+      this.shared.authStatusChange.next();
+      this.welcome=false;
+      this.router.navigate(['tabs/tab1'])
+  
+    }
 
 
   async presentToast() {
@@ -62,10 +60,10 @@ export class RegistrationComponent implements OnInit {
     });
 
     toast.present();
-  }
+  };
 
 
-}
+};
 
 
 

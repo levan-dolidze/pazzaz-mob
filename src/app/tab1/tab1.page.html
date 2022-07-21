@@ -3,9 +3,9 @@
     <ion-title>
 
     </ion-title>
-    <ion-buttons style="display:flex;" slot="start">
+    <ion-buttons style="display:flex;width: 100%;" slot="start">
       <ion-menu-button  menu="main-menu"></ion-menu-button>
-      <form #searchForm='ngForm' >
+      <form style="margin:0 auto;"   #searchForm='ngForm' >
         <ion-toolbar >
           <ion-item >
             <ion-input  
@@ -21,22 +21,17 @@
           </ion-item>
         </ion-toolbar>
       </form>
-   
         <!-- <span style="margin-left: 10px"  matBadge="5" matBadgeOverlap="false"><ion-icon name="notifications-outline"></ion-icon></span> -->
-
     </ion-buttons>
-
   </ion-toolbar>
-
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
-
   </ion-header>
   <div  class="item-content">
 
-    <div  class="item-list" *ngFor="let item of (products$|async)|filter:field.search:'itemName'"  [routerLink]="['/viewDetails',item.itemId]">
+    <div  class="item-list" *ngFor="let item of (products$|async)|filter:field.search:'itemName'"  [routerLink]="['/tabs/details',item.itemId]">
       {{item.itemName}}
       <img [src]="item.image" alt="">
       <span style="text-decoration: line-through;color:red">{{item.oldPrice}} ₾</span>
