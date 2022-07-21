@@ -5,7 +5,6 @@ import { IsUserLoggedInGuard } from '../is-user-logged-in.guard';
 import { LanguageComponent } from '../language/language.component';
 import { LoginComponent } from '../login/login.component';
 import { RegistrationComponent } from '../registration/registration.component';
-
 import { TabsPage } from './tabs.page';
 
 const routes: Routes = [

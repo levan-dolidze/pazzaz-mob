@@ -26,12 +26,12 @@ export class LanguageComponent implements OnInit {
 
   }
 
-  openMenu(){
-    this.menu.open()
+  // openMenu(){
+  //   this.menu.open()
 
   // this.route.navigate(['/tabs/language'])
 
-  }
+  // }
 
 
 
