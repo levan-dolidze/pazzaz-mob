@@ -52,7 +52,7 @@ export class DetailsPage implements OnInit {
           this.http.addSubscribtion(res).subscribe()
         })
         setTimeout(() => {
-          this.rout.navigate(['/tabs/tab1'])
+          this.rout.navigate(['/tabs/home'])
         }, 3000);
       } else {
         this.rout.navigate(['/tabs/login'])

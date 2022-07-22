@@ -24,11 +24,10 @@ export class AppComponent implements OnInit {
   userLoggedIn: boolean;
 
   ngOnInit() {
-
     this.shared.authStatusChange.subscribe((res) => {
-      // this.userLoggedIn = false
       this.checkUserLoggedIn();
     })
+
     this.checkUserLoggedIn();
     this.lang = localStorage.getItem('lang');
     this.shared.languageControl(this.lang, this.translate);
@@ -36,7 +35,7 @@ export class AppComponent implements OnInit {
       this.lang = localStorage.getItem('lang');
       this.shared.languageControl(this.lang, this.translate);
     })
-  }
+  };
 
   logOut() {
     this.firebaseAuth.logOut();
@@ -44,7 +43,7 @@ export class AppComponent implements OnInit {
     this.checkUserLoggedIn();
     this.menu.close();
 
-  }
+  };
 
 
   checkUserLoggedIn() {
@@ -59,12 +58,7 @@ export class AppComponent implements OnInit {
     this.menu.close();
     this.router.navigate(['/tabs/my-subscribtions'])
 
-  }
-
-
-
-
-
+  };
 
 
 
@@ -84,7 +78,7 @@ export class AppComponent implements OnInit {
   }
   goToProducts() {
     this.closeMenu();
-    this.router.navigate(['/tabs/tab1'])
+    this.router.navigate(['/tabs/home'])
 
 
   }

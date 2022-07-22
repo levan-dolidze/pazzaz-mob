@@ -48,7 +48,7 @@ export class RegistrationComponent implements OnInit {
       await this.firebaseAuth.signIn(this.field.username, this.field.password);
       this.shared.authStatusChange.next();
       this.welcome=false;
-      this.router.navigate(['tabs/tab1'])
+      this.router.navigate(['tabs/home'])
   
     }
 

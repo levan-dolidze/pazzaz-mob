@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { IonInfiniteScroll, MenuController } from '@ionic/angular';
 import { from, Observable, of } from 'rxjs';
 import { filter, shareReplay, toArray } from 'rxjs/operators';
@@ -9,32 +9,29 @@ import { ProductModel } from '../shared/models';
 import { SharedService } from '../shared/shared.service';
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: 'app-home',
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
 })
-export class Tab1Page implements OnInit {
+export class HomePage implements OnInit {
 
   constructor(private menu: MenuController,
     private http: HttpService,
     private router: ActivatedRoute,
-    private shared: SharedService
-  ) {
-
-
-  }
-  @ViewChild(IonInfiniteScroll, { static: false }) infiniteScroll: IonInfiniteScroll;
-  products$: Observable<ProductModel[]>
-  items$: Observable<ProductModel[]>;
-
-  field: Field = new Field();
-  itemLength: any = 6;
-
-
-  ngOnInit(): void {
+    private shared: SharedService) { }
+    @ViewChild(IonInfiniteScroll, { static: false }) infiniteScroll: IonInfiniteScroll;
+    products$: Observable<ProductModel[]>
+    items$: Observable<ProductModel[]>;
+  
+    field: Field= new Field();
+    itemLength: any = 6;
+  ngOnInit() {
     this.producstOnUI();
     this.field.search = '';
-  };
+  }
+
+
+
   returnProducts() {
     this.items$ = this.http.getProducts().pipe();
     shareReplay()
@@ -94,4 +91,4 @@ export class Tab1Page implements OnInit {
     };
   };
 
-};
+}
