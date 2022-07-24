@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   field: Field = new Field();
   constructor(private firebaseAuth: FirebaseAuthService,
     private router: Router,
-    private shared:SharedService
+    private shared: SharedService
   ) { }
 
   ngOnInit() { }
@@ -34,8 +34,8 @@ export class LoginComponent implements OnInit {
 
 
 
-  forgetPass() {
-
+ async forgetPass() {
+   await this.firebaseAuth.resetPassword(this.field.password)
 
   }
 

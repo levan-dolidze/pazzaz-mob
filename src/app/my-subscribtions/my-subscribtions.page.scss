@@ -1,18 +1,26 @@
+
+ion-content {
+    // overwrite inline styles
+    --offset-bottom: auto!important;
+    --overflow: hidden;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
 .subscribtions-incart-content {
     display: flex;
     justify-content: center;
     width: 100%;
     height: 100%;
-    overflow: scroll;
+    // overflow: scroll;
 
 }
 
-.subscribtions-incart-container {
-    // display: flex;
-}
 
 .subscribtions-incart-list {
-    overflow: scroll;
+    // overflow: scroll;
     width: 100%;
 
 }

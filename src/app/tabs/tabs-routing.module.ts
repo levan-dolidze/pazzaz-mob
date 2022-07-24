@@ -39,6 +39,10 @@ const routes: Routes = [
         path: 'details/:id',
         loadChildren: () => import('../details/details.module').then( m => m.DetailsPageModule)
       },
+      {
+        path: 'resetPass',
+        loadChildren: () => import('../reset-pass/reset-pass.module').then( m => m.ResetPassPageModule)
+      },
     
       {
         path: "language",

@@ -31,4 +31,12 @@ export class FirebaseAuthService {
     // localStorage.removeItem('user');
 
   };
+
+
+  async resetPassword(email) {
+   await this.firebaseAuth.sendPasswordResetEmail(email).then(res=>{
+    
+   })
+
+  }
 }
