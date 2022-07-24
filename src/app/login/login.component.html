@@ -23,7 +23,7 @@
         #userPassword="ngModel"
                    placeholder="Password">
         </ion-input>
-        <span (click)="forgetPass()" style="font-size:small">დაგავიწყდა?</span>
+        <span [routerLink]="['/tabs/resetPass']"  style="font-size:small">დაგავიწყდა?</span>
       </ion-item>
       <div style="margin-top:5px;color: red;"*ngIf="userLoginForm.submitted&&userPassword.errors?.required">
         შეიყვანეთ პაროლი
@@ -33,4 +33,37 @@
 
     </form>
   </div>
+
+
+
+
+  <form (submit)="loginOTP(userOTPform)"#userOTPform='ngForm' >
+    <ion-item>
+      <ion-input [(ngModel)]="field.mobile"
+      required
+      name="mobile"
+      type="text"
+      #userMobile="ngModel"
+      placeholder="mobile">
+      </ion-input>
+    </ion-item>
+    <div style="margin-top:5px;color: red;"*ngIf="userOTPform.submitted&&userOTPform.errors?.required">
+      შეიყვანეთ მობილური
+  </div>
+  <p [routerLink]="['/tabs/registration']" >რეგისტრაცია</p>
+    <ion-button type="submit" id="login-btn" color="primary">sign in</ion-button>
+  
+  
+
+  </form>
+  <input [(ngModel)]="field.otp" type="text">
+  
+  <button (click)="confirm()" >confirm</button>
+
+
+
+
+
+
+
 </div>

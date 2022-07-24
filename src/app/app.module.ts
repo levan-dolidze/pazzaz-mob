@@ -13,6 +13,8 @@ import { FormsModule } from '@angular/forms';
 import { RegistrationComponent } from './registration/registration.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
+// import { RecaptchaVerifier } from 'firebase/auth';
+
 
 
 

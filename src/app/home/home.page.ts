@@ -28,6 +28,7 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.producstOnUI();
     this.field.search = '';
+    
   }
 
 

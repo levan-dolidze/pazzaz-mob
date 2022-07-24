@@ -1,25 +1,28 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>resetPass</ion-title>
+    <ion-title>Reset Psssword</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<form (ngSubmit)="resetPassword(resetPassFrom)" #resetPassFrom="ngForm" >
-  <ion-content>
-
-    <ion-item>
-      <ion-input [(ngModel)]="field.username" 
-      required
-      name="Email"
-      #userName="ngModel"
-      placeholder="Password">
-      </ion-input>
-    </ion-item>
-
-    <ion-button type="submit" class="login-btn" color="primary">sign in</ion-button>
-
-  </ion-content>
 
 
-  
-</form>
+  <ion-content class="reset-content" >
+    <div class="reset-content">
+    <form (ngSubmit)="resetPass(resetPassFrom)" #resetPassFrom="ngForm" >
+        <ion-item>
+          <ion-input [(ngModel)]="field.username" 
+          required
+          name="Email"
+          #userName="ngModel"
+          placeholder="Email">
+          </ion-input>
+        </ion-item>
+    
+        <ion-button type="submit" class="reset-btn" color="primary">Reset Pass</ion-button>
+    
+      
+    </form>
+</div>
+    
+    </ion-content>
+

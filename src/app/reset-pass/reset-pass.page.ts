@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseAuthService } from '../services/firebase-auth.service';
 import { Field } from '../shared/classes';
 
 @Component({
@@ -8,15 +9,23 @@ import { Field } from '../shared/classes';
 })
 export class ResetPassPage implements OnInit {
 
-  constructor() { }
+  constructor(private firebaseAuth:FirebaseAuthService) { }
   field: Field = new Field();
 
   ngOnInit() {
   }
 
-  resetPassword(email) {
+ async resetPass(email) {
+    if(email.invalid){
+      return 
+    }else{
+      await this.firebaseAuth.resetPassword(this.field.username)
+
+    }
 
   }
+
+
 
 
 }

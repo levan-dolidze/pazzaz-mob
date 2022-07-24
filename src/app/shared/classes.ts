@@ -2,6 +2,8 @@ export class Field{
     username:string;
     password:string;
     search:string;
+    mobile:string;
+    otp:any;
 }
 
 
@@ -12,3 +14,4 @@ export class Registr{
     surname:string;
 
 }
+
