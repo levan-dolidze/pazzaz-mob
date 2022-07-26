@@ -4,13 +4,17 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 // import 'firebase/compat/auth';
 // import 'firebase/compat/firestore';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseAuthService {
 
-  constructor(private firebaseAuth: AngularFireAuth) { }
-  confirmationResult: any;
+  constructor(private firebaseAuth: AngularFireAuth) {  }
+  
+  confirmationResult:any;
+  
+ 
   async signUp(email: string, password: string) {
     await this.firebaseAuth.createUserWithEmailAndPassword(email, password).
       then(res => {
@@ -34,15 +38,24 @@ export class FirebaseAuthService {
   };
 
 
-  async loginWithOTP(mob, btn) {
-    const result = await this.firebaseAuth.signInWithPhoneNumber(mob, btn)
-    this.confirmationResult = result
+  async loginWithOTP(mob,btn){
+const confir= await this.firebaseAuth.signInWithPhoneNumber(mob,btn).then(res=>{
+  this.confirmationResult=confir
+  
+  })
+
   }
 
 
   async enterVerificationCode(code) {
-    const res = await this.confirmationResult.confirm(code);
-    console.log(res)
+ const result= await this.confirmationResult.confirm(code).then((result) => {
+      console.log(result)
+
+      console.log(result)
+    }).catch((error) => {
+      // User couldn't sign in (bad verification code?)
+      // ...
+    });
   }
 
 
