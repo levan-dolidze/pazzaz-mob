@@ -13,12 +13,13 @@ import 'firebase/compat/firestore';
 })
 export class LoginComponent implements OnInit {
   field: Field = new Field();
-  recapture:any;
+  recapture: any;
+  enterOtp:boolean;
 
   constructor(private firebaseAuth: FirebaseAuthService,
     private router: Router,
     private shared: SharedService
-  ) { }
+  ) { this.enterOtp=false}
 
 
   ngOnInit() {
@@ -50,18 +51,16 @@ export class LoginComponent implements OnInit {
     if (form.invalid) {
       return
     } else {
-      await this.firebaseAuth.loginWithOTP(this.field.mobile,this.recapture)
+     this.enterOtp=true;
+      await this.firebaseAuth.loginWithOTP(this.field.mobile, this.recapture);
     }
 
   }
 
-async confirm(){
-  this.firebaseAuth.enterVerificationCode(this.field.otp).then(
-    userData => {
-      console.log('sucess');
-    }
-  );
-}
+  async confirm() {
+    await this.firebaseAuth.enterVerificationCode(this.field.otp);
+    this.field.otp=null;
+  }
 
 
 }
