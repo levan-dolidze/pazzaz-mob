@@ -46,12 +46,13 @@ export class FirebaseAuthService {
   async enterVerificationCode(code) {
     const res = await this.confirmationResult.confirm(code);
     if(res.user){
+      
       localStorage.setItem('user', JSON.stringify(res.user));
       this.router.navigate(['/tabs/home'])
       this.shared.authStatusChange.next();
       
     }else{
-      return console.error();
+      return alert(78)
       
     }
   }

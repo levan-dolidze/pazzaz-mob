@@ -39,31 +39,34 @@
   <h6>OTP Verify</h6>
 
 
-  <form [hidden]="enterOtp" (submit)="loginOTP(userOTPform)"#userOTPform='ngForm' >
+  <form [hidden]="enterOtp" (ngSubmit)="loginOTP(userOTPform)"#userOTPform='ngForm' >
     <ion-item>
       <ion-input [(ngModel)]="field.mobile"
       required
+      pattern="^\+[0-9]{1,15}$"
       name="mobile"
       type="text"
       #userMobile="ngModel"
       placeholder="mobile">
       </ion-input>
     </ion-item>
-    <div style="margin-top:5px;color: red;"*ngIf="userOTPform.submitted&&userOTPform.errors?.required">
-      შეიყვანეთ მობილური
+    <div  *ngIf="userOTPform.submitted">
+      <div *ngIf="userMobile.errors?.required" style="margin-top:5px;color: red;font-size: small;">
+        შეიყვანე მობილურის ნომერი
+      </div>
+      <div *ngIf="userMobile.errors?.pattern" style="margin-top:5px;color: red;font-size: small;">
+       არასწორი ფორმატი
+      </div>
   </div>
   <!-- <p [routerLink]="['/tabs/registration']" >რეგისტრაცია</p> -->
-    <ion-button type="submit" id="login-btn" color="primary">send OTP</ion-button>
-  
-  
-
+    <ion-button  type="submit" id="login-btn" color="primary">send OTP</ion-button>
   </form>
 
-<form class="otp-content" [hidden]="!enterOtp" >
-
+<form class="otp-content" [hidden]="!enterOtp" #otpForm="ngForm" >
   <ion-item>
     <ion-input [(ngModel)]="field.otp"
     required
+    pattern="^\+[0-9]$"
     maxlength="6"
     name="otp"
     type="text"
@@ -72,7 +75,10 @@
     </ion-input>
   </ion-item>
 
-  <ion-button  (click)="confirm()"  id="login-btn" color="primary">confirm</ion-button>
+
+
+
+  <ion-button type="submit"  (click)="confirm()"  id="login-btn" color="primary">confirm</ion-button>
 </form>
   
 

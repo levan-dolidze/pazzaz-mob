@@ -19,7 +19,9 @@ export class LoginComponent implements OnInit {
   constructor(private firebaseAuth: FirebaseAuthService,
     private router: Router,
     private shared: SharedService
-  ) { this.enterOtp=false}
+  ) { this.enterOtp=false
+  
+  }
 
 
   ngOnInit() {
@@ -58,7 +60,7 @@ export class LoginComponent implements OnInit {
   }
 
   async confirm() {
-    await this.firebaseAuth.enterVerificationCode(this.field.otp);
+    await this.firebaseAuth.enterVerificationCode(this.field.otp)
     this.field.otp=null;
   }
 
