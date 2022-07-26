@@ -56,7 +56,11 @@ export class LoginComponent implements OnInit {
   }
 
 async confirm(){
-await this.firebaseAuth.enterVerificationCode(this.field.otp)
+  this.firebaseAuth.enterVerificationCode(this.field.otp).then(
+    userData => {
+      console.log('sucess');
+    }
+  );
 }
 
 
