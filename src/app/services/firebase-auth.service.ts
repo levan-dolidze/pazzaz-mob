@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
+// import firebase from 'firebase/compat/app';
+// import 'firebase/compat/auth';
+// import 'firebase/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ import 'firebase/compat/firestore';
 export class FirebaseAuthService {
 
   constructor(private firebaseAuth: AngularFireAuth) { }
- confirmationResult: firebase.auth.ConfirmationResult;
+  confirmationResult: any;
   async signUp(email: string, password: string) {
     await this.firebaseAuth.createUserWithEmailAndPassword(email, password).
       then(res => {
@@ -34,24 +34,15 @@ export class FirebaseAuthService {
   };
 
 
-  async loginWithOTP(mob,btn){
-   await this.firebaseAuth.signInWithPhoneNumber(mob,btn).then(res=>{
-    })
-
+  async loginWithOTP(mob, btn) {
+    const result = await this.firebaseAuth.signInWithPhoneNumber(mob, btn)
+    this.confirmationResult = result
   }
 
 
   async enterVerificationCode(code) {
-    return new Promise<any>((resolve, reject) => {
-      this.confirmationResult.confirm(code).then(async (result) => {
-        console.log(result);
-        const user = result.user;
-        resolve(user);
-      }).catch((error) => {
-        reject(error.message);
-      });
-
-    });
+    const res = await this.confirmationResult.confirm(code);
+    console.log(res)
   }
 
 
@@ -67,9 +58,9 @@ export class FirebaseAuthService {
 
 
   async resetPassword(email) {
-   await this.firebaseAuth.sendPasswordResetEmail(email).then(res=>{
-    
-   })
+    await this.firebaseAuth.sendPasswordResetEmail(email).then(res => {
+
+    })
 
   }
 }
