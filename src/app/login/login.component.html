@@ -1,7 +1,6 @@
 <h6 style="text-align:center;">PAZAZZ LOGO</h6>
 <div class="login-content">
-
-  <div class="login-inner">
+  <div [hidden]="enterOtp"  class="login-inner">
     <h6>Email verify</h6>
     <form (ngSubmit)="userLogin(userLoginForm)" #userLoginForm="ngForm">
       <ion-item>
@@ -13,7 +12,7 @@
         </ion-input>
       </ion-item>
       
-      <div style="margin-top:5px;color: red;" *ngIf="userLoginForm.submitted&&userUsername.errors?.required">
+      <div style="margin-top:5px;color: red; font-size: small;" *ngIf="userLoginForm.submitted&&userUsername.errors?.required">
         შეიყვანეთ მომხმარებელი
     </div>
       <ion-item>
@@ -26,7 +25,7 @@
         </ion-input>
         <span [routerLink]="['/tabs/resetPass']"  style="font-size:small">დაგავიწყდა?</span>
       </ion-item>
-      <div style="margin-top:5px;color: red;"*ngIf="userLoginForm.submitted&&userPassword.errors?.required">
+      <div style="margin-top:5px;color: red; font-size: small;"*ngIf="userLoginForm.submitted&&userPassword.errors?.required">
         შეიყვანეთ პაროლი
     </div>
     <p [routerLink]="['/tabs/registration']" >რეგისტრაცია</p>
@@ -36,7 +35,7 @@
   </div>
 
 
-  <h6>OTP Verify</h6>
+  <h6>SMS Verify</h6>
 
 
   <form [hidden]="enterOtp" (ngSubmit)="loginOTP(userOTPform)"#userOTPform='ngForm' >
@@ -50,35 +49,51 @@
       placeholder="mobile">
       </ion-input>
     </ion-item>
-    <div  *ngIf="userOTPform.submitted">
+    <ng-container  *ngIf="userOTPform.submitted">
       <div *ngIf="userMobile.errors?.required" style="margin-top:5px;color: red;font-size: small;">
         შეიყვანე მობილურის ნომერი
       </div>
       <div *ngIf="userMobile.errors?.pattern" style="margin-top:5px;color: red;font-size: small;">
        არასწორი ფორმატი
       </div>
-  </div>
+  </ng-container>
   <!-- <p [routerLink]="['/tabs/registration']" >რეგისტრაცია</p> -->
     <ion-button  type="submit" id="login-btn" color="primary">send OTP</ion-button>
   </form>
 
-<form class="otp-content" [hidden]="!enterOtp" #otpForm="ngForm" >
+<form [hidden]="!enterOtp" class="otp-content" (ngSubmit)="confirm(otpForm)"  #otpForm="ngForm" >
+  <h6> {{field.mobile}}</h6>
+
   <ion-item>
     <ion-input [(ngModel)]="field.otp"
     required
-    pattern="^\+[0-9]$"
-    maxlength="6"
+    pattern="^[0-9]{6,6}$"
     name="otp"
     type="text"
     #userOtp="ngModel"
     placeholder="otp">
     </ion-input>
+
   </ion-item>
+  <div (click)="resendOTP()" style="display: flex;justify-content: center; margin-top: 5px;">
+ <ion-icon  style="font-size:small"  name="refresh-outline"> </ion-icon>
+ <span style="font-size:small">resend SMS</span>
+  </div>
 
 
+  <ng-container  *ngIf="otpForm.submitted">
+    <div *ngIf="userOtp.errors?.required" style="color: red;font-size: small;">
+      შეიყვანე SMS
+    </div>
+    <div *ngIf="userOtp.errors?.pattern" style="color: red;font-size: small;">
+      არასწორი ფორმატი
+    </div>
 
+</ng-container>
+  <div>
+    <ion-button type="submit"  id="login-btn" color="primary">confirm</ion-button>
 
-  <ion-button type="submit"  (click)="confirm()"  id="login-btn" color="primary">confirm</ion-button>
+  </div>
 </form>
   
 

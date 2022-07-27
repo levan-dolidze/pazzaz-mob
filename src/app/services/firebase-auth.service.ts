@@ -40,6 +40,7 @@ export class FirebaseAuthService {
   async loginWithOTP(mob, btn) {
     const result = await this.firebaseAuth.signInWithPhoneNumber(mob, btn);
     this.confirmationResult = result
+    console.log(this.confirmationResult)
   }
 
 

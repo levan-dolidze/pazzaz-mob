@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 import { FirebaseAuthService } from '../services/firebase-auth.service';
 import { Field } from '../shared/classes';
 import { SharedService } from '../shared/shared.service';
@@ -14,17 +14,26 @@ import 'firebase/compat/firestore';
 export class LoginComponent implements OnInit {
   field: Field = new Field();
   recapture: any;
-  enterOtp:boolean;
+  enterOtp: boolean;
   constructor(private firebaseAuth: FirebaseAuthService,
     private router: Router,
     private shared: SharedService
-  ) { this.enterOtp=false
-  
+  ) {
+    this.enterOtp = false
+
   }
 
 
   ngOnInit() {
-    
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.enterOtp = false;
+
+      }
+    })
+
+
+
     this.recapture = new firebase.auth.RecaptchaVerifier('login-btn', {
       size: 'invisible',
       callback: (response) => {
@@ -43,6 +52,7 @@ export class LoginComponent implements OnInit {
     else {
       await this.firebaseAuth.signIn(this.field.username, this.field.password);
       this.router.navigate(['/tabs/home'])
+      this.enterOtp = false
       this.shared.authStatusChange.next();
 
     }
@@ -53,15 +63,24 @@ export class LoginComponent implements OnInit {
     if (form.invalid) {
       return
     } else {
-     this.enterOtp=true;
+      this.enterOtp = true;
       await this.firebaseAuth.loginWithOTP(this.field.mobile, this.recapture);
     }
 
   }
+  resendOTP() {
+    this.firebaseAuth.loginWithOTP(this.field.mobile, this.recapture);
 
-  async confirm() {
-    await this.firebaseAuth.enterVerificationCode(this.field.otp)
-    this.field.otp=null;
+  }
+
+  async confirm(form) {
+    if(form.invalid){
+      return
+    }else{
+      await this.firebaseAuth.enterVerificationCode(this.field.otp)
+      this.field.otp = null;
+    }
+    
   }
 
 
