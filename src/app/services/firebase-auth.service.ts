@@ -12,7 +12,7 @@ import { SharedService } from '../shared/shared.service';
 export class FirebaseAuthService {
 
   constructor(private firebaseAuth: AngularFireAuth,
-    private router:Router,private shared:SharedService) { }
+    private router: Router, private shared: SharedService) { }
   confirmationResult: any;
   async signUp(email: string, password: string) {
     await this.firebaseAuth.createUserWithEmailAndPassword(email, password).
@@ -39,22 +39,19 @@ export class FirebaseAuthService {
 
   async loginWithOTP(mob, btn) {
     const result = await this.firebaseAuth.signInWithPhoneNumber(mob, btn);
-    this.confirmationResult = result
-    console.log(this.confirmationResult)
+    this.confirmationResult = result;
   }
 
 
   async enterVerificationCode(code) {
     const res = await this.confirmationResult.confirm(code);
-    if(res.user){
-      
+    if (res.user) {
       localStorage.setItem('user', JSON.stringify(res.user));
       this.router.navigate(['/tabs/home'])
       this.shared.authStatusChange.next();
-      
-    }else{
-      return alert(78)
-      
+
+    } else {
+
     }
   }
 
