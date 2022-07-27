@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
   field: Field = new Field();
   recapture: any;
   enterOtp:boolean;
-
   constructor(private firebaseAuth: FirebaseAuthService,
     private router: Router,
     private shared: SharedService
@@ -25,6 +24,7 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit() {
+    
     this.recapture = new firebase.auth.RecaptchaVerifier('login-btn', {
       size: 'invisible',
       callback: (response) => {
