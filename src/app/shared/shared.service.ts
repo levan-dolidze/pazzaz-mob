@@ -39,7 +39,9 @@ export class SharedService {
   };
 
 
-
+getToken(){
+  return localStorage.getItem('user')
+}
 
 
 

@@ -66,7 +66,10 @@ export class DetailsPage implements OnInit {
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'THANK YOU FOR SUBSCRIBTION',
-      duration: 2500
+      duration: 2500,
+      color:'success',
+      icon:'checkmark-done-outline'
+
     });
 
     toast.present();
