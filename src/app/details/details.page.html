@@ -1,6 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Details</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+    <div style="width: 90%;text-align: center;">
+      {{"details"|translate}}
+    </div>
   </ion-toolbar>
 </ion-header>
 
@@ -11,19 +16,19 @@
       <h2>{{item.itemName}}</h2>
       <img [src]="item.image">
       <div style="margin-top:10px;">
-        <span style="text-decoration: line-through;color:red"> ფასი: ₾ {{item.oldPrice}} </span>
-        <span style="font-size:large;margin-left: 10px;">ახალი ფასი: ₾ {{item.newPrice}} </span>
+        <span style="text-decoration: line-through;color:red"> {{"oldPrice"|translate}}: ₾ {{item.oldPrice}} </span>
+        <span style="font-size:large;margin-left: 10px;">{{"newPrice"|translate}}: ₾ {{item.newPrice}} </span>
       </div>
   
       <div class="description-content">
-        <h6 style="font-size: small;">Description</h6>
-        <li>კატეგორია: {{item.type}}</li>
-        <li>მატერია: {{item.material}}</li>
-        <li>ფერი: {{item.color}} </li>
-        <li>სქესი: {{item.gender}}</li>
-        <li>ქუსლის ზომა: {{item.hill}}</li>
+        <h6 style="font-size: small;">{{"description"|translate}}</h6>
+        <li>{{"category"|translate}}: {{item.type}}</li>
+        <li>{{"matter"|translate}} {{item.material}}</li>
+        <li>{{"color"|translate}}: {{item.color}} </li>
+        <li>{{"gender"|translate}}: {{item.gender}}</li>
+        <li>{{"heelSize"|translate}}: {{item.hill}}</li>
       </div>
     </div>
   </div>
-  <ion-button  class="subscribe-btn" (click)="subscribe()" color="danger">Subscribe</ion-button>
+  <ion-button  class="subscribe-btn" (click)="subscribe()" color="danger">{{"subscribe"|translate}}</ion-button>
 </ion-content>

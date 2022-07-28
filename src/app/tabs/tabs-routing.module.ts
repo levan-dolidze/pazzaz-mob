@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '../auth.guard';
-import { IsUserLoggedInGuard } from '../is-user-logged-in.guard';
+import { AuthGuard } from '../guards/auth.guard';
+import { IsUserLoggedInGuard } from '../guards/is-user-logged-in.guard';
 import { LanguageComponent } from '../language/language.component';
 import { LoginComponent } from '../login/login.component';
 import { RegistrationComponent } from '../registration/registration.component';

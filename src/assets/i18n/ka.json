@@ -3,7 +3,20 @@
     "login":"შესვლა",
     "logout":"გასვლა",
     "products":"პროდუქტები",
-    "subscribtion":"ჩემი გამოწერილი"
+    "subscribtion":"ჩემი გამოწერილი",
+    "details":"დეტალები",
+    "subscribe":"გამოწერა",
+    "newPrice":"ახალი ფასი",
+    "oldPrice":"ძველი ფასი",
+    "description":"აღწერა",
+    "category":"კატეგორია",
+    "matter":"მატერია",
+    "color":"ფერი",
+    "gender":"სქესი",
+    "heelSize":"ქუსლის ზომა"
+
+
+
 
 
 

@@ -3,6 +3,19 @@
     "login":"Login",
     "logout":"Logout",
     "products":"Products",
-    "subscribtion":"My Subscribtion"
+    "subscribtion":"My Subscribtion",
+    "details":"Details",
+    "subscribe":"Subscribe",
+    "description":"Description",
+    "newPrice":"New Price",
+    "oldPrice":"Old Price",
+    "category":"Category",
+    "matter":"Matter",
+    "color":"Color",
+    "gender":"Gender",
+    "heelSize":"Heel Size"
+    
+
+
 
 }
