@@ -32,15 +32,12 @@ export class FirebaseAuthService {
   async logOut() {
     this.firebaseAuth.signOut();
     localStorage.clear()
-    // localStorage.removeItem('user');
-
   };
 
 
   async loginWithOTP(mob, btn) {
     const result = await this.firebaseAuth.signInWithPhoneNumber(mob, btn);
     this.confirmationResult = result;
-    console.log(this.confirmationResult)
   }
 
 
@@ -52,7 +49,7 @@ export class FirebaseAuthService {
       this.shared.authStatusChange.next();
 
     } else {
-
+      return
     }
   }
 

@@ -22,4 +22,18 @@
     object-fit: cover;
     border-radius: 10px;
   }
+  .form-content{
+    width:100%;
+  }
+.input-inner{
+  margin: 0 auto;
+  width: 75%;
+  height: 80%;;
+  border-radius: 10px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 
+}

@@ -28,6 +28,9 @@ export class MySubscribtionsPage implements OnInit {
     this.returnSubscribedItems();
 
   };
+  refresh(event) {
+    window.location.reload()
+  }
 
   returnSubscribedItems() {
     this.subscribedItems$ = this.http.getSubscribtionItems();
