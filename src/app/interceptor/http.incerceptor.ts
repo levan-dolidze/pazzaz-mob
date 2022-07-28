@@ -16,17 +16,15 @@ export class HttpConfigInterceptor implements HttpInterceptor {
 
   constructor(public toastController: ToastController) { }
 
-
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.error) {
           this.presentToast(error.message)
-        } else {
-          return throwError(error.error)
         }
+        return throwError(error.error)
       })
-     )
+    )
   };
 
   async presentToast(message) {
@@ -34,7 +32,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
       message: message,
       duration: 2500,
       icon: 'information-circle',
-      color:'danger'
+      color: 'danger'
     });
     toast.present();
   };

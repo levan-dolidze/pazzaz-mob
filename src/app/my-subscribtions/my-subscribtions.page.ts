@@ -23,8 +23,10 @@ export class MySubscribtionsPage implements OnInit {
   userUID: any;
 
 
+
   ngOnInit() {
     this.returnSubscribedItems();
+
   };
 
   returnSubscribedItems() {

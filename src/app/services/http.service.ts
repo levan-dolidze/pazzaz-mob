@@ -18,7 +18,7 @@ export class HttpService {
 
 
   get UID() {
-    this.shared.userAuthCheckong().subscribe((res) => {
+    this.shared.userAuthChecking().subscribe((res) => {
       if (res) {
         let token = localStorage.getItem('user');
         this.userUID = JSON.parse(token)

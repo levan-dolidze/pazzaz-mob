@@ -43,16 +43,16 @@ export class DetailsPage implements OnInit {
 
   
   subscribe() {
-    // let inString = JSON.stringify(this.selectedItemArr$);
-    // localStorage.setItem('subscribedItems', inString);
-    this.shared.userAuthCheckong().subscribe((res) => {
+    this.shared.userAuthChecking().subscribe((res) => {
       if (res) {
         this.presentToast()
         this.selectedItemArr$.subscribe((res)=>{
-          this.http.addSubscribtion(res).subscribe()
+          this.http.addSubscribtion(res).subscribe();
         })
         setTimeout(() => {
-          this.rout.navigate(['/tabs/home'])
+          this.rout.navigate(['/tabs/home']).then(()=>{
+            window.location.reload();
+          })
         }, 3000);
       } else {
         this.rout.navigate(['/tabs/login'])

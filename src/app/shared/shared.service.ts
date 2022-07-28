@@ -17,7 +17,7 @@ export class SharedService {
     lang === 'en' ? translate.setDefaultLang('en') : translate.setDefaultLang('ka');
   };
 
-  userAuthCheckong(): Observable<any> {
+  userAuthChecking(): Observable<any> {
     let isUserLoggedIn = localStorage.getItem('user');
     if (isUserLoggedIn) {
       return of(true)
