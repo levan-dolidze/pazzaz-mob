@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Event, NavigationStart, Router } from '@angular/router';
 import { IonInfiniteScroll, MenuController } from '@ionic/angular';
 import { from, Observable, of } from 'rxjs';
 import { filter, shareReplay, toArray } from 'rxjs/operators';
@@ -18,18 +18,21 @@ export class HomePage implements OnInit {
   constructor(private menu: MenuController,
     private http: HttpService,
     private router: ActivatedRoute,
+    private routerURL: Router,
     private shared: SharedService) { }
-    @ViewChild(IonInfiniteScroll, { static: false }) infiniteScroll: IonInfiniteScroll;
-    products$: Observable<ProductModel[]>
-    items$: Observable<ProductModel[]>;
-  
-    field: Field= new Field();
-    itemLength: any = 6;
+  @ViewChild(IonInfiniteScroll, { static: false }) infiniteScroll: IonInfiniteScroll;
+  products$: Observable<ProductModel[]>
+  items$: Observable<ProductModel[]>;
+
+  field: Field = new Field();
+  itemLength: any = 6;
   ngOnInit() {
     this.producstOnUI();
     this.field.search = '';
-    
+    this.changeURL();
   }
+
+
 
 
 
@@ -92,4 +95,17 @@ export class HomePage implements OnInit {
     };
   };
 
-}
+  
+  changeURL() {
+    this.routerURL.events.subscribe((event: Event) => {
+      if (event instanceof NavigationStart) {
+        this.reset()
+      };
+    })
+  };
+
+  reset() {
+    this.field.search = '';
+  };
+
+};

@@ -28,7 +28,7 @@
 <ion-content>
   <ion-header collapse="condense">
   </ion-header>
-  <div   class="item-content">
+  <div class="item-content">
 
     <div  class="item-list" *ngFor="let item of (products$|async)|filter:field.search:'itemName'"  [routerLink]="['/tabs/details',item.itemId]">
       {{item.itemName}}
@@ -50,6 +50,5 @@
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
   
-
 
 </ion-content>
