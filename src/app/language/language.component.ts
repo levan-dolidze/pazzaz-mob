@@ -17,21 +17,11 @@ export class LanguageComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-
     this.lang = localStorage.getItem('lang');
     this.shared.languageControl(this.lang, this.translate);
-    // this.shared.changeLanguageEvent.subscribe(() => {
-    //   this.shared.languageControl(this.lang, this.translate)
-    // })
+  };
 
-  }
 
-  // openMenu(){
-  //   this.menu.open()
-
-  // this.route.navigate(['/tabs/language'])
-
-  // }
 
 
 
@@ -41,5 +31,5 @@ export class LanguageComponent implements OnInit {
     localStorage.setItem('lang', lang.target.value);
     this.translate.use(lang.target.value);
     this.shared.changeLanguageEvent.next();
-  }
-}
+  };
+};

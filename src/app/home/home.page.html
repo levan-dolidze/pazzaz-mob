@@ -1,13 +1,10 @@
-
-
-
 <ion-header>
   <ion-toolbar>
-    <div style="display: flex;"  >
+    <div class="home-content"   >
       <ion-buttons slot="start">
         <ion-menu-button menu="main-menu"></ion-menu-button>
       </ion-buttons>
-      <form class="form-contern" style="width:100%;" #searchForm='ngForm' >
+      <form class="form-content" #searchForm='ngForm' >
           <ion-item class="input-inner"  >
             <ion-input 
                         [(ngModel)]="field.search"
@@ -17,7 +14,7 @@
                         (ngModelChange)="filtering()"
                         >
             </ion-input>
-            <ion-icon (click)="search(searchForm)"  style="margin:0px 10px 5px 0px;font-size: small;" name="search-outline"></ion-icon>
+            <ion-icon class="searchIcon" (click)="search(searchForm)" name="search-outline"></ion-icon>
           </ion-item>
       </form>
     </div>
@@ -32,8 +29,8 @@
 
     <div  class="item-list" *ngFor="let item of (products$|async)|filter:field.search:'itemName'"  [routerLink]="['/tabs/details',item.itemId]">
       {{item.itemName}}
-      <img [src]="item.image" alt="">
-      <span style="text-decoration: line-through;color:red">{{item.oldPrice}} ₾</span>
+      <img [src]="item.image">
+      <span class="oldPrice">{{item.oldPrice}} ₾</span>
       <span>{{item.newPrice}} ₾</span>
     </div>
 
@@ -45,8 +42,7 @@
 
 
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-      <ion-infinite-scroll-content
-     >
+      <ion-infinite-scroll-content>
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
   

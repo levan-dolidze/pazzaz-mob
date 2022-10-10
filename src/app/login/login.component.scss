@@ -1,23 +1,33 @@
+@import '/src/config.scss';
 
-.login-content{
+.title {
+    width: 90%;
     text-align: center;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+}
+
+.login-content {
+    text-align: center;
+    @include centreItems;
     padding: 20px;
 }
 
-.ion-input{
+.ion-input {
     border-bottom: 5px solid red;
 }
-ion-item{
+
+ion-item {
     margin-top: 10px;
     border-radius: 10px;
 }
-#login-btn,.login-btn{
+
+#login-btn,
+.login-btn {
     width: 80%;
     margin-top: 15px;
+}
 
+.error-message{
+    margin-top:5px;
+    color: red; 
+    font-size: small;
 }

@@ -4,7 +4,7 @@
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
-    <div style="width: 90%;text-align: center;">
+    <div class="title">
       Log In
     </div>
   </ion-toolbar>
@@ -25,7 +25,7 @@
         </ion-input>
       </ion-item>
       
-      <div style="margin-top:5px;color: red; font-size: small;" *ngIf="userLoginForm.submitted&&userUsername.errors?.required">
+      <div class="error-message"  *ngIf="userLoginForm.submitted&&userUsername.errors?.required">
         შეიყვანეთ მომხმარებელი
     </div>
       <ion-item>
@@ -38,7 +38,7 @@
         </ion-input>
         <span [routerLink]="['/tabs/resetPass']"  style="font-size:small">დაგავიწყდა?</span>
       </ion-item>
-      <div style="margin-top:5px;color: red; font-size: small;"*ngIf="userLoginForm.submitted&&userPassword.errors?.required">
+      <div class="error-message" *ngIf="userLoginForm.submitted&&userPassword.errors?.required">
         შეიყვანეთ პაროლი
     </div>
     <p style="font-size: small;" [routerLink]="['/tabs/registration']" >რეგისტრაცია</p>
@@ -63,10 +63,10 @@
       </ion-input>
     </ion-item>
     <ng-container  *ngIf="userOTPform.submitted">
-      <div *ngIf="userMobile.errors?.required" style="margin-top:5px;color: red;font-size: small;">
+      <div *ngIf="userMobile.errors?.required" class="error-message">
         შეიყვანე მობილურის ნომერი
       </div>
-      <div *ngIf="userMobile.errors?.pattern" style="margin-top:5px;color: red;font-size: small;">
+      <div *ngIf="userMobile.errors?.pattern" class="error-message">
        არასწორი ფორმატი
       </div>
   </ng-container>
@@ -95,10 +95,10 @@
 
 
   <ng-container  *ngIf="otpForm.submitted">
-    <div *ngIf="userOtp.errors?.required" style="color: red;font-size: small;">
+    <div *ngIf="userOtp.errors?.required" class="error-message">
       შეიყვანე SMS
     </div>
-    <div *ngIf="userOtp.errors?.pattern" style="color: red;font-size: small;">
+    <div *ngIf="userOtp.errors?.pattern" class="error-message">
       არასწორი ფორმატი
     </div>
 

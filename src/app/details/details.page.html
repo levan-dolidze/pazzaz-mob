@@ -3,25 +3,25 @@
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
-    <div style="width: 90%;text-align: center;">
+    <div class="title">
       {{"details"|translate}}
     </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div style="overflow:auto;" class="view-details-content" *ngIf="selectedItemArr$">
+  <div *ngIf="selectedItemArr$" class="view-details-content">
     <div class="view-details-inner" *ngFor="let item of (selectedItemArr$|async)">
-      <ion-icon [routerLink]="['']" name="chevron-back-outline"></ion-icon>
+      <ion-icon class="back"  [routerLink]="['']" name="chevron-back-outline"></ion-icon>
       <h2>{{item.itemName}}</h2>
       <img [src]="item.image">
-      <div style="margin-top:10px;">
-        <span style="text-decoration: line-through;color:red"> {{"oldPrice"|translate}}: ₾ {{item.oldPrice}} </span>
-        <span style="font-size:large;margin-left: 10px;">{{"newPrice"|translate}}: ₾ {{item.newPrice}} </span>
+      <div class="price-content">
+        <span class="oldPrice"> {{"oldPrice"|translate}}: ₾ {{item.oldPrice}} </span>
+        <span class="newPrice" >{{"newPrice"|translate}}: ₾ {{item.newPrice}} </span>
       </div>
   
       <div class="description-content">
-        <h6 style="font-size: small;">{{"description"|translate}}</h6>
+        <h6 class="description-title">{{"description"|translate}}</h6>
         <li>{{"category"|translate}}: {{item.type}}</li>
         <li>{{"matter"|translate}} {{item.material}}</li>
         <li>{{"color"|translate}}: {{item.color}} </li>

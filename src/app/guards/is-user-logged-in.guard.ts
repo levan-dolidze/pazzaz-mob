@@ -15,5 +15,4 @@ export class IsUserLoggedInGuard implements CanActivate {
       return false;
     }
   }
-  
-}
+};
