@@ -15,5 +15,6 @@ export interface ProductModel {
     color: any;
     hill: any;
     userUID?:any;
+    key:any;
 
 }

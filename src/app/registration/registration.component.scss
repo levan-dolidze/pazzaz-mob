@@ -1,33 +1,26 @@
+@import '/src/config.scss';
 
-.signup-content{
+.signup-content {
     text-align: center;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    @include centreItems;
     padding: 20px;
 }
-.ion-input{
+
+.ion-input {
     border-bottom: 5px solid red;
 }
 
-ion-item{
-margin-top: 10px;
+ion-item {
+    margin-top: 10px;
 }
-.login-btn{
+
+.login-btn {
     width: 100%;
     margin-top: 10px;
+};
 
-
-}
-.welcome-content{
+.welcome-content {
     text-align: center;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    @include centreItems;
     padding: 20px;
-
-}
+};

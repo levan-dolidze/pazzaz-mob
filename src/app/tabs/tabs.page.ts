@@ -1,14 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SharedService } from '../shared/shared.service';
 
 @Component({
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss']
 })
-export class TabsPage {
+export class TabsPage implements OnInit {
 
-  constructor() {}
+  constructor(private shared: SharedService) {
 
+  }
+  subscribtionQTY: number = 0;
 
+  ngOnInit() {
+    this.returnSubscriptionQTY()
 
-}
+    this.shared.itemQTYEvent.subscribe(() => {
+      this.returnSubscriptionQTY()
+    })
+  }
+
+  returnSubscriptionQTY() {
+    let subQTY = localStorage.getItem('subscribtionQTY');
+    if (subQTY) {
+      this.subscribtionQTY = JSON.parse(subQTY)
+    }
+    return
+  }
+
+};

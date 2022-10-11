@@ -13,18 +13,15 @@ export class ResetPassPage implements OnInit {
   field: Field = new Field();
 
   ngOnInit() {
-  }
+  };
 
  async resetPass(email) {
     if(email.invalid){
       return 
     }else{
       await this.firebaseAuth.resetPassword(this.field.username)
-
     }
-
-  }
-
+  };
 
 
 

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
-import { from, Observable } from 'rxjs';
-import { filter, toArray } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { HttpService } from '../services/http.service';
 import { ProductModel } from '../shared/models';
 import { SharedService } from '../shared/shared.service';
@@ -15,9 +14,9 @@ export class MySubscribtionsPage implements OnInit {
 
   constructor(private http: HttpService,
     public actionSheetController: ActionSheetController,
-    private shared: SharedService,) { }
+    private shared: SharedService) { }
 
-  subscribedItems$: Observable<ProductModel>
+  subscribedItems$: Observable<ProductModel[]>
   items$: Array<ProductModel> = [];
   parsedItemData: Array<ProductModel> = [];
   userUID: any;
@@ -27,41 +26,42 @@ export class MySubscribtionsPage implements OnInit {
     this.returnSubscribedItems();
 
   };
-  refresh(event) {
+  refresh() {
     window.location.reload()
   }
 
   returnSubscribedItems() {
     this.subscribedItems$ = this.http.getSubscribtionItems();
-    this.subscribedItems$.subscribe((res) => {
-      if (res) {
-        let itemDataAll = Object.values(res);
-        for (let i = 0; i < itemDataAll.length; i++) {
-          if (itemDataAll[i][0]) {
-            this.parsedItemData.push(itemDataAll[i][0])
-          }
-          this.shared.returnAuthModel().subscribe((res) => {
-            if (res) {
-              this.userUID = res;
-              from(this.parsedItemData).pipe(
-                filter((x => x.userUID == this.userUID.uid)),
-                toArray()
-              ).subscribe((res) => {
-                this.items$ = res
-              })
-            }
-            return
-          })
-        }
-      }
-      return
-    })
+    // this.subscribedItems$.subscribe((res) => {
+    //   console.log(res)
+    //   if (res) {
+    //     let itemDataAll = Object.values(res);
+    //     for (let i = 0; i < itemDataAll.length; i++) {
+    //       if (itemDataAll[i][0]) {
+    //         this.parsedItemData.push(itemDataAll[i][0])
+    //       }
+    //       this.shared.returnAuthModel().subscribe((res) => {
+    //         if (res) {
+    //           this.userUID = res;
+    //           from(this.parsedItemData).pipe(
+    //             filter((x => x.userUID == this.userUID.uid)),
+    //             toArray()
+    //           ).subscribe((res) => {
+    //             this.items$ = res
+    //           })
+    //         }
+    //         return
+    //       })
+    //     }
+    //   }
+    //   return
+    // })
   };
 
 
-  deleteSubscribtion(itemId?: any) {
-    this.items$.splice(itemId, 1)
-    this.http.deleteSubscribedItem(itemId).subscribe(() => {
+  deleteSubscribtion(key: any) {
+    this.http.deleteSubscribedItem(key).subscribe(() => {
+      //გასაკეთებელია წაშლაზე ივენთი გავისროლო და განვაახლო საბსკრიბშენის რაოდენობა
 
     })
   };
@@ -96,7 +96,7 @@ export class MySubscribtionsPage implements OnInit {
     const { role, data } = await actionSheet.onDidDismiss();
     console.log('onDidDismiss resolved with role and data', role, data);
     if (data?.type == 'delete') {
-      this.deleteSubscribtion();
+      this.deleteSubscribtion(i)
     };
   };
 

@@ -12,7 +12,7 @@
 
 <ion-content>
 
-  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+  <ion-refresher slot="fixed" (ionRefresh)="refresh()">
     <ion-refresher-content refreshingSpinner="circles" refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
@@ -20,24 +20,27 @@
   <div class="subscribtions-incart-content">
     <div *ngIf="items$">
       <div class="subscribtions-incart-list">
-        <div class="subscribtions-incart-inner" *ngFor="let item of items$;let i =index">
-          <img [src]="item.image">
-          Name:
-          <span>
+        <div class="subscribtions-incart-inner" *ngFor="let item of (subscribedItems$|async);let i =index">
+          <div>
+            <img [src]="item.image">
+          </div>
+          <div>
+            Name:
+          </div>
+          <div>
             {{item.itemName}}
-          </span>
-          <!-- Brand:
-          <span>
-            {{item.brand}}
-          </span> -->
-          Price:
-          <span>
+          </div>
+          <div>
+            Price:
+          </div>
+          <div>
             {{item.oldPrice}}
-          </span>
-          <ion-icon (click)="presentActionSheet(i)" style="float:right;cursor:pointer;opacity:0.8;"
-            name="trash-outline"></ion-icon>
+          </div>
+          <ion-icon (click)="presentActionSheet(item.key)" style="float:right;cursor:pointer;opacity:0.8;"
+            name="trash-outline">
+          </ion-icon>
 
-        </div>
+          </div>
 
       </div>
     </div>

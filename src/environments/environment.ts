@@ -13,7 +13,7 @@ export const environment = {
     appId: "1:144615995309:web:19eb03ddf34033fe135324",
     measurementId: "G-RQDP9T1S7V"
   },
-  apiUrl: 'https://pazazz-mob-default-rtdb.firebaseio.com/subscribtions.json'
+  apiUrl: 'https://pazazz-mob-default-rtdb.firebaseio.com/'
 };
 
 /*

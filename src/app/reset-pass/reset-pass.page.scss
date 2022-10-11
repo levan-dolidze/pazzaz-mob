@@ -1,14 +1,12 @@
-.reset-content{
+@import '/src/config.scss';
+
+.reset-content {
     text-align: center;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    @include centreItems;
     padding: 20px;
 }
 
-.reset-btn{
+.reset-btn {
     margin-top: 20px;
     width: 100%;
 }
