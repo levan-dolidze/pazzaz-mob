@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { HttpService } from '../services/http.service';
 import { ProductModel } from '../shared/models';
 import { SharedService } from '../shared/shared.service';
@@ -20,18 +20,41 @@ export class MySubscribtionsPage implements OnInit {
   items$: Array<ProductModel> = [];
   parsedItemData: Array<ProductModel> = [];
   userUID: any;
+  subscribtionQTY: number = 0;
 
 
   ngOnInit() {
     this.returnSubscribedItems();
+    this.shared.itemQTYEvent.subscribe(()=>{
+      this.subscribedItems$.subscribe((res) => {
+        this.subscribtionQTY = res.length
+        this.subscribedItems$=of(res)
+  
+      })
+
+    })
 
   };
+
+
+
+
+
+
+
+
+
+
   refresh() {
     window.location.reload()
   }
 
   returnSubscribedItems() {
     this.subscribedItems$ = this.http.getSubscribtionItems();
+    this.subscribedItems$.subscribe((res) => {
+      this.subscribtionQTY = res.length
+
+    })
     // this.subscribedItems$.subscribe((res) => {
     //   console.log(res)
     //   if (res) {
@@ -62,7 +85,7 @@ export class MySubscribtionsPage implements OnInit {
   deleteSubscribtion(key: any) {
     this.http.deleteSubscribedItem(key).subscribe(() => {
       //გასაკეთებელია წაშლაზე ივენთი გავისროლო და განვაახლო საბსკრიბშენის რაოდენობა
-
+      this.shared.itemQTYEvent.next()
     })
   };
 

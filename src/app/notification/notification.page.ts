@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from '../shared/shared.service';
 
 @Component({
   selector: 'app-notification',
@@ -9,7 +10,8 @@ export class NotificationPage implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
 
-}
+  ngOnInit() {
+
+  }
+};

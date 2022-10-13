@@ -8,25 +8,13 @@ import { SharedService } from '../shared/shared.service';
 })
 export class TabsPage implements OnInit {
 
-  constructor(private shared: SharedService) {
+  constructor() {
 
   }
-  subscribtionQTY: number = 0;
 
   ngOnInit() {
-    this.returnSubscriptionQTY()
 
-    this.shared.itemQTYEvent.subscribe(() => {
-      this.returnSubscriptionQTY()
-    })
   }
 
-  returnSubscriptionQTY() {
-    let subQTY = localStorage.getItem('subscribtionQTY');
-    if (subQTY) {
-      this.subscribtionQTY = JSON.parse(subQTY)
-    }
-    return
-  }
 
 };

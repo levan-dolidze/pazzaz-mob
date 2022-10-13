@@ -61,19 +61,19 @@ export class DetailsPage implements OnInit {
       if (res) {
         this.presentToast()
         this.selectedItemArr$.subscribe((response) => {
-          let subQTY=0;
-          let qty = localStorage.getItem('subscribtionQTY');
+          // let subQTY=0;
+          // let qty = localStorage.getItem('subscribtionQTY');
           this.http.addSubscribtion(response).subscribe(() => {
-            if (qty) {
-              subQTY += JSON.parse(qty)+1
-              localStorage.setItem('subscribtionQTY', JSON.stringify(subQTY))
-              this.shared.itemQTYEvent.next()
-            }
-            else{
-              localStorage.setItem('subscribtionQTY',JSON.stringify(1));
-              this.shared.itemQTYEvent.next()
+            // if (qty) {
+            //   subQTY += JSON.parse(qty)+1
+            //   localStorage.setItem('subscribtionQTY', JSON.stringify(subQTY))
+            //   this.shared.itemQTYEvent.next()
+            // }
+            // else{
+            //   localStorage.setItem('subscribtionQTY',JSON.stringify(1));
+            //   this.shared.itemQTYEvent.next()
 
-            }
+            // }
           });
         })
         setTimeout(() => {
