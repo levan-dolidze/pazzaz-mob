@@ -26,6 +26,7 @@ export class MySubscribtionsPage implements OnInit {
   ngOnInit() {
     this.returnSubscribedItems();
     this.shared.itemQTYEvent.subscribe(()=>{
+    this.returnSubscribedItems();
       this.subscribedItems$.subscribe((res) => {
         this.subscribtionQTY = res.length
         this.subscribedItems$=of(res)
