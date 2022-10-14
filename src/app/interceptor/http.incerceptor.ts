@@ -1,4 +1,3 @@
-//httpConfig.interceptor.ts
 import {
   HttpRequest,
   HttpHandler,

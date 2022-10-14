@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Event, NavigationStart, Router } from '@angular/router';
 import { IonInfiniteScroll, MenuController } from '@ionic/angular';
 import { from, Observable, of } from 'rxjs';
@@ -12,14 +12,13 @@ import { SharedService } from '../shared/shared.service';
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class HomePage implements OnInit {
 
   constructor(private menu: MenuController,
     private http: HttpService,
-    private router: ActivatedRoute,
-    private routerURL: Router,
-    private shared: SharedService) { }
+    private routerURL: Router) { }
   @ViewChild(IonInfiniteScroll, { static: false }) infiniteScroll: IonInfiniteScroll;
   products$: Observable<ProductModel[]>
   items$: Observable<ProductModel[]>;
@@ -30,7 +29,7 @@ export class HomePage implements OnInit {
     this.producstOnUI();
     this.field.search = '';
     this.changeURL();
-  }
+  };
 
 
 
