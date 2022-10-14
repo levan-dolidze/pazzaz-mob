@@ -11,6 +11,7 @@ export class SharedService {
   changeLanguageEvent: Subject<any> = new Subject();
   authStatusChange: Subject<any> = new Subject();
   itemQTYEvent: Subject<any> = new Subject();
+  notificationEvent:Subject<any> =new Subject();
 
   languageControl(lang: any, translate: any) {
     lang = localStorage.getItem('lang');
@@ -39,9 +40,9 @@ export class SharedService {
   };
 
 
-getToken(){
-  return localStorage.getItem('user')
-}
+  getToken() {
+    return localStorage.getItem('user')
+  }
 
 
 

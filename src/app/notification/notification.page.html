@@ -10,5 +10,36 @@
 </ion-header>
 
 <ion-content>
+  <div class="subscribtions-incart-content">
+    <div >
+      <div class="subscribtions-incart-list">
+        <div class="subscribtions-incart-inner" *ngFor="let item of (subscribedItems$|async);let i =index">
+          <div>
+            <img [src]="item.image">
+          </div>
+          <div>
+            Name:
+          </div>
+          <div>
+            {{item.itemName}}
+          </div>
+          <div>
+            Price:
+          </div>
+          <div>
+            {{item.newPrice}}
+          </div>
+          <ion-icon  style="float:right;cursor:pointer;opacity:0.8;"
+            name="trash-outline">
+          </ion-icon>
+
+          </div>
+
+      </div>
+    </div>
+
+
+
+  </div>
 
 </ion-content>

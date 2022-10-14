@@ -3,6 +3,7 @@ import { forkJoin, from } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { HttpService } from '../services/http.service';
 import { ProductModel } from '../shared/models';
+import { SharedService } from '../shared/shared.service';
 
 @Component({
   selector: 'app-tabs',
@@ -13,12 +14,16 @@ export class TabsPage implements OnInit {
   notifications: number;
   array: Array<ProductModel> = [];
 
-  constructor(private http: HttpService) {
+  constructor(private http: HttpService,
+    private shared: SharedService
+
+  ) {
 
   }
 
   ngOnInit() {
     this.returnNotifications();
+
   };
 
   returnNotifications() {
@@ -31,7 +36,8 @@ export class TabsPage implements OnInit {
         return item.newPrice
       })
       if (maped.length > 0) {
-        this.notifications = maped.length
+        this.notifications = maped.length;
+        this.shared.notificationEvent.next(result)
       }
       return
     })
