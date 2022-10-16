@@ -2,7 +2,7 @@ export interface ProductModel {
     itemId: string | number;
     itemName: string;
     image:string;
-    oldPrice: number;
+    oldPrice?: number;
     newPrice: number;
     brand: string;
     storeId: string | number;

@@ -11,26 +11,45 @@ import { SharedService } from '../shared/shared.service';
 })
 export class NotificationPage implements OnInit {
   subscribedItems$: Observable<ProductModel[]>
+  userUID: any;
+
   constructor(private shared: SharedService,
     private http: HttpService
   ) { }
 
 
   ngOnInit() {
-    this.returnNotifications();
-    this.shared.notificationEvent.subscribe((res) => {
-      this.subscribedItems$ = of(res)
-    })
+    // this.returnNotifications();
+
+    this.refreshControl()
+
+
+
+
+
   };
 
-  returnNotifications() {
-    forkJoin({
-      requestOne: this.http.getProducts(),
-      requestTwo: this.http.getSubscribtionItems()
-    }).subscribe((res) => {
-      let result = res.requestOne.filter(x1 => res.requestTwo.every(x2 => x1.newPrice !== x2.newPrice));
-      this.subscribedItems$ = of(result)
+  refreshControl() {
+    this.shared.notificationEvent.subscribe((res) => {
+      this.subscribedItems$ = of(res)
+
     })
-  };
+
+
+  }
+
+  // returnNotifications() {
+  //   forkJoin({
+  //     local: this.http.getProducts(),
+  //     base: this.http.getSubscribtionItems()
+  //   }).subscribe((res) => {
+  //     if (res.base.length > 0) {
+  //       localStorage.setItem('data', JSON.stringify(res.base))
+  //     }
+  //   })
+
+  // };
+
+
 
 };

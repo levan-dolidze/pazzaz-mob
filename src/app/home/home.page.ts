@@ -12,7 +12,7 @@ import { SharedService } from '../shared/shared.service';
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
-  changeDetection:ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomePage implements OnInit {
 
@@ -94,7 +94,7 @@ export class HomePage implements OnInit {
     };
   };
 
-  
+
   changeURL() {
     this.routerURL.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {

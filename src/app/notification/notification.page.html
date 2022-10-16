@@ -4,14 +4,14 @@
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
     <div style="width: 90%;text-align: center;">
-      Notifications 
+      Notifications
     </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="subscribtions-incart-content">
-    <div >
+    <div>
       <div class="subscribtions-incart-list">
         <div class="subscribtions-incart-inner" *ngFor="let item of (subscribedItems$|async);let i =index">
           <div>
@@ -23,20 +23,23 @@
           <div>
             {{item.itemName}}
           </div>
+
           <div>
-            Price:
-          </div>
-          <div>
-            {{item.newPrice}}
-          </div>
-          <ion-icon  style="float:right;cursor:pointer;opacity:0.8;"
-            name="trash-outline">
-          </ion-icon>
+            new prise:{{item.newPrice}}
 
           </div>
+          <div>
+            old prise:{{item.oldPrice?item.oldPrice:''}}
+          </div>
+
+
+        
+        <ion-icon style="float:right;cursor:pointer;opacity:0.8;" name="trash-outline">
+        </ion-icon>
 
       </div>
     </div>
+  </div>
 
 
 
