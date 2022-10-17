@@ -1,6 +1,6 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
-import { forkJoin, from, interval } from 'rxjs';
-import { filter, switchMap } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { forkJoin, interval } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { HttpService } from '../services/http.service';
 import { ProductModel } from '../shared/models';
 import { SharedService } from '../shared/shared.service';
@@ -10,7 +10,7 @@ import { SharedService } from '../shared/shared.service';
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss']
 })
-export class TabsPage implements OnInit{
+export class TabsPage implements OnInit {
   notifications: number;
   array: Array<ProductModel> = [];
 
@@ -23,34 +23,34 @@ export class TabsPage implements OnInit{
 
   ngOnInit() {
     this.refreshControl();
-  
+
   };
 
   refreshControl() {
-    interval(1000).pipe(
+    interval(60000).pipe(
       switchMap(x => forkJoin({
         base: this.http.getSubscribtionItems()
       }))
     ).subscribe((res) => {
       let storedData = localStorage.getItem('data');
-      if(storedData){
+      if (storedData) {
         let storedDataParsed: ProductModel[] = JSON.parse(storedData);
-      //vcvli fass xelovnurad
-      storedDataParsed[0].newPrice = 75
-      let result = res.base.filter(x1 => storedDataParsed.every(x2 => x1.newPrice !== x2.newPrice));
-      if (result.length === 0) {
-        return
+        //vcvli fass xelovnurad
+        storedDataParsed[0].newPrice = 75
+        let result = res.base.filter(x1 => storedDataParsed.every(x2 => x1.newPrice !== x2.newPrice));
+        if (result.length === 0) {
+          return
+        }
+        else {
+          result[0].oldPrice = storedDataParsed[0].newPrice
+          this.notifications = result.length
+          this.shared.notificationEvent.next(result)
+          localStorage.setItem('data', JSON.stringify(result))
+        }
       }
       else {
-        result[0].oldPrice = storedDataParsed[0].newPrice
-        this.notifications=result.length
-        this.shared.notificationEvent.next(result)
-        localStorage.setItem('data', JSON.stringify(result))
+        return
       }
-    }
-    else{
-      return
-    }
     })
   }
 

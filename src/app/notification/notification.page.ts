@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { forkJoin, Observable, of } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { forkJoin, Observable, of, Subscription } from 'rxjs';
 import { HttpService } from '../services/http.service';
 import { ProductModel } from '../shared/models';
 import { SharedService } from '../shared/shared.service';
@@ -9,9 +9,10 @@ import { SharedService } from '../shared/shared.service';
   templateUrl: './notification.page.html',
   styleUrls: ['./notification.page.scss'],
 })
-export class NotificationPage implements OnInit {
+export class NotificationPage implements OnInit, OnDestroy {
   subscribedItems$: Observable<ProductModel[]>
   userUID: any;
+  unSubscribe$ = new Subscription;
 
   constructor(private shared: SharedService,
     private http: HttpService
@@ -30,10 +31,16 @@ export class NotificationPage implements OnInit {
   };
 
   refreshControl() {
-    this.shared.notificationEvent.subscribe((res) => {
-      this.subscribedItems$ = of(res)
+    //ამას მოაქვს ლოკალ სტორიჯიდან დატა დამახსოვრებული და შეცვლილი
+    const dat = localStorage.getItem('data')
+    const data = JSON.parse(dat)
+    this.subscribedItems$ = of(data)
 
-    })
+    //ეს მოდის ტაბს კომპონენტიდან
+    // this.unSubscribe$ = this.shared.notificationEvent.subscribe((res) => {
+    //   this.subscribedItems$ = of(res)
+
+    // })
 
 
   }
@@ -50,6 +57,10 @@ export class NotificationPage implements OnInit {
 
   // };
 
+  ngOnDestroy(): void {
+    this.unSubscribe$.unsubscribe();
+    console.log('unsubs')
+  }
 
 
 };
