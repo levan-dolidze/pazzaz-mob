@@ -32,9 +32,16 @@ export class NotificationPage implements OnInit, OnDestroy {
 
   refreshControl() {
     //ამას მოაქვს ლოკალ სტორიჯიდან დატა დამახსოვრებული და შეცვლილი
-    const dat = localStorage.getItem('data')
-    const data = JSON.parse(dat)
-    this.subscribedItems$ = of(data)
+    this.shared.userAuthChecking().subscribe((res) => {
+      if (res) {
+        const dat = localStorage.getItem('data')
+        const data = JSON.parse(dat)
+        this.subscribedItems$ = of(data)
+      }
+      return
+
+    })
+
 
     //ეს მოდის ტაბს კომპონენტიდან
     // this.unSubscribe$ = this.shared.notificationEvent.subscribe((res) => {

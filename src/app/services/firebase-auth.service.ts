@@ -31,7 +31,7 @@ export class FirebaseAuthService {
 
   async logOut() {
     this.firebaseAuth.signOut();
-    localStorage.clear()
+    localStorage.removeItem('user')
   };
 
 

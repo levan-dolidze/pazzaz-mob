@@ -13,6 +13,7 @@ import { SharedService } from '../shared/shared.service';
 export class TabsPage implements OnInit {
   notifications: number;
   array: Array<ProductModel> = [];
+  isUserLogin: boolean;
 
   constructor(private http: HttpService,
     private shared: SharedService
@@ -27,6 +28,11 @@ export class TabsPage implements OnInit {
   };
 
   refreshControl() {
+    this.shared.userAuthChecking().subscribe((res) => {
+      this.isUserLogin=res
+
+
+    })
     interval(60000).pipe(
       switchMap(x => forkJoin({
         base: this.http.getSubscribtionItems()
@@ -48,6 +54,8 @@ export class TabsPage implements OnInit {
           localStorage.setItem('data', JSON.stringify(result))
         }
       }
+
+
       else {
         return
       }
