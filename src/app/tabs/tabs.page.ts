@@ -23,44 +23,51 @@ export class TabsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.refreshControl();
+    let storedData = localStorage.getItem('data');
+    if (storedData) {
+      const d = JSON.parse(storedData)
+      this.notifications = d.length
+    }
+    // this.refreshControl();
+    this.shared.logOutEvent.subscribe(() => {
+      this.notifications = null;
+    })
 
   };
 
+  changePrise() {
+    let storedData = localStorage.getItem('data');
+    let storedDataParsed: ProductModel[] = JSON.parse(storedData);
+    storedDataParsed[0].newPrice = 75;
+    localStorage.setItem('data', JSON.stringify(storedDataParsed))
+    this.refreshControl();
+  }
   refreshControl() {
-    this.shared.userAuthChecking().subscribe((res) => {
-      this.isUserLogin=res
-
-
-    })
-    interval(60000).pipe(
-      switchMap(x => forkJoin({
-        base: this.http.getSubscribtionItems()
-      }))
+    forkJoin({
+      base: this.http.getSubscribtionItems()
+    }
     ).subscribe((res) => {
       let storedData = localStorage.getItem('data');
       if (storedData) {
         let storedDataParsed: ProductModel[] = JSON.parse(storedData);
         //vcvli fass xelovnurad
-        storedDataParsed[0].newPrice = 75
+
         let result = res.base.filter(x1 => storedDataParsed.every(x2 => x1.newPrice !== x2.newPrice));
+        this.notifications = result.length
         if (result.length === 0) {
           return
         }
         else {
           result[0].oldPrice = storedDataParsed[0].newPrice
-          this.notifications = result.length
           this.shared.notificationEvent.next(result)
           localStorage.setItem('data', JSON.stringify(result))
         }
       }
-
-
       else {
         return
       }
     })
-  }
+  };
 
 
 

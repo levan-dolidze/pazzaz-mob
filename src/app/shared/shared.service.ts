@@ -11,7 +11,8 @@ export class SharedService {
   changeLanguageEvent: Subject<any> = new Subject();
   authStatusChange: Subject<any> = new Subject();
   itemQTYEvent: Subject<any> = new Subject();
-  notificationEvent:Subject<any> =new Subject();
+  notificationEvent: Subject<any> = new Subject();
+  logOutEvent:Subject<void>=new Subject();
 
   languageControl(lang: any, translate: any) {
     lang = localStorage.getItem('lang');

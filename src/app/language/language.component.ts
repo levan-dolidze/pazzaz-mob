@@ -16,15 +16,11 @@ export class LanguageComponent implements OnInit {
               private menu: MenuController
     ) { }
 
+    
   ngOnInit() {
     this.lang = localStorage.getItem('lang');
     this.shared.languageControl(this.lang, this.translate);
   };
-
-
-
-
-
 
 
   changeLanguage(lang: any) {

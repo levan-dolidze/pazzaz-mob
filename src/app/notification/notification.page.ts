@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { forkJoin, Observable, of, Subscription } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { HttpService } from '../services/http.service';
 import { ProductModel } from '../shared/models';
 import { SharedService } from '../shared/shared.service';
@@ -15,32 +16,35 @@ export class NotificationPage implements OnInit, OnDestroy {
   unSubscribe$ = new Subscription;
 
   constructor(private shared: SharedService,
-    private http: HttpService
   ) { }
 
 
   ngOnInit() {
-    // this.returnNotifications();
+    this.refreshControl();
+    this.shared.logOutEvent.subscribe((res)=>{
+      this.subscribedItems$=of([])
 
-    this.refreshControl()
-
-
-
-
-
+    })
   };
 
   refreshControl() {
-    //ამას მოაქვს ლოკალ სტორიჯიდან დატა დამახსოვრებული და შეცვლილი
-    this.shared.userAuthChecking().subscribe((res) => {
-      if (res) {
-        const dat = localStorage.getItem('data')
-        const data = JSON.parse(dat)
-        this.subscribedItems$ = of(data)
+    forkJoin({
+      urerData: this.shared.returnAuthModel(),
+      authCheck: this.shared.userAuthChecking()
+    }).subscribe((res) => {
+      const dataStorage = localStorage.getItem('data')
+      if (res.authCheck && dataStorage) {
+        const data = JSON.parse(dataStorage)
+        const filtredNotidications = data.filter((item) => {
+          return item.userUID === res.urerData.uid
+        })
+        this.subscribedItems$ = of(filtredNotidications)
       }
-      return
-
+      else{
+        this.subscribedItems$ =of([])
+      }
     })
+
 
 
     //ეს მოდის ტაბს კომპონენტიდან
@@ -48,26 +52,12 @@ export class NotificationPage implements OnInit, OnDestroy {
     //   this.subscribedItems$ = of(res)
 
     // })
-
-
   }
 
-  // returnNotifications() {
-  //   forkJoin({
-  //     local: this.http.getProducts(),
-  //     base: this.http.getSubscribtionItems()
-  //   }).subscribe((res) => {
-  //     if (res.base.length > 0) {
-  //       localStorage.setItem('data', JSON.stringify(res.base))
-  //     }
-  //   })
-
-  // };
 
   ngOnDestroy(): void {
     this.unSubscribe$.unsubscribe();
-    console.log('unsubs')
-  }
+  };
 
 
 };

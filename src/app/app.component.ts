@@ -43,6 +43,7 @@ export class AppComponent implements OnInit {
     this.checkUserLoggedIn();
     this.menu.close();
     this.router.navigate([''])
+    this.shared.logOutEvent.next();
 
   };
 

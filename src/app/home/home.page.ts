@@ -25,14 +25,12 @@ export class HomePage implements OnInit {
 
   field: Field = new Field();
   itemLength: any = 6;
+  
   ngOnInit() {
     this.producstOnUI();
     this.field.search = '';
     this.changeURL();
   };
-
-
-
 
 
   returnProducts() {
