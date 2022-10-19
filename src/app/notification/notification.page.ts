@@ -21,9 +21,8 @@ export class NotificationPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.refreshControl();
-    this.shared.logOutEvent.subscribe((res)=>{
-      this.subscribedItems$=of([])
-
+    this.shared.logOutEvent.subscribe((res) => {
+      this.subscribedItems$ = of([])
     })
   };
 
@@ -40,19 +39,18 @@ export class NotificationPage implements OnInit, OnDestroy {
         })
         this.subscribedItems$ = of(filtredNotidications)
       }
-      else{
-        this.subscribedItems$ =of([])
+      else {
+        this.subscribedItems$ = of([])
       }
     })
 
 
 
     //ეს მოდის ტაბს კომპონენტიდან
-    // this.unSubscribe$ = this.shared.notificationEvent.subscribe((res) => {
-    //   this.subscribedItems$ = of(res)
-
-    // })
-  }
+    this.unSubscribe$ = this.shared.notificationEvent.subscribe((res) => {
+      this.subscribedItems$ = of(res)
+    })
+  };
 
 
   ngOnDestroy(): void {
